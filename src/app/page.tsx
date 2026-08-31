@@ -188,22 +188,26 @@ export default function Home() {
                 If the work is interesting, let’s talk.
               </h2>
               <p className="text-base leading-8 text-zinc-300">
-                We can replace this placeholder with your real contact routes, resume link,
-                social links, and anything else you actually want public.
+                You can find more of my work, background, and ongoing projects through the links
+                below.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
               <a
-                href="mailto:hello@example.com"
+                href="https://www.linkedin.com/in/mikhailverghese/"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
               >
-                hello@example.com
+                LinkedIn
               </a>
               <a
-                href="#"
+                href="https://github.com/mikhailverghese"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm font-medium text-white transition hover:border-white/60"
               >
-                Add LinkedIn / GitHub
+                GitHub
               </a>
             </div>
           </div>
