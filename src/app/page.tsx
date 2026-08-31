@@ -2,20 +2,20 @@ const featuredProjects = [
   {
     name: "Centful",
     summary:
-      "A personal finance app focused on transaction clarity, thoughtful UX, and clean mobile flows.",
-    tags: ["React Native", "Expo", "Plaid", "Product Design"],
+      "An iOS expense tracker built to make personal finance feel clearer, calmer, and more thoughtfully designed.",
+    tags: ["iOS", "React Native", "Plaid", "Product Design"],
   },
   {
-    name: "Portfolio",
+    name: "Intelligent Job Search Analytics Platform",
     summary:
-      "This site itself, built to present shipped work, experiments, and case studies without feeling generic.",
-    tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+      "A web dashboard for organizing job search activity, tracking progress, and turning scattered effort into structured insight.",
+    tags: ["Web App", "Analytics", "Dashboard", "Workflow Design"],
   },
   {
-    name: "Systems + Experiments",
+    name: "Bitebook",
     summary:
-      "A place for smaller builds, prototypes, and technical rabbit holes worth showing even when they are not polished products.",
-    tags: ["Prototyping", "UI Engineering", "Automation", "R&D"],
+      "A food-focused product concept centered on discovery, organization, and a better experience around places worth remembering.",
+    tags: ["Product Concept", "UX", "Consumer App", "Exploration"],
   },
 ];
 
