@@ -53,16 +53,16 @@ export default function Home() {
             <div className="grid w-full gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] lg:items-end">
               <div className="max-w-3xl space-y-8">
                 <div className="inline-flex items-center rounded-full border border-black/10 bg-white/80 px-4 py-2 text-sm text-zinc-600 backdrop-blur">
-                  Building digital products, interfaces, and systems that feel sharp.
+                  Analyst, builder, and product-minded problem solver.
                 </div>
                 <div className="space-y-6">
                   <h1 className="text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl">
-                    Modern product work, clear thinking, and projects worth showing.
+                    Analyst by profession, builder by obsession.
                   </h1>
                   <p className="max-w-2xl text-lg leading-8 text-zinc-600 sm:text-xl">
-                    I build software with a strong bias toward taste, clarity, and useful
-                    execution. This portfolio is where product thinking, engineering, and
-                    experiments live in one place.
+                    I’m drawn to software, product thinking, and the challenge of turning ideas
+                    into useful, well-crafted tools. This portfolio is where I share the things I
+                    build, explore, and refine outside of the day job.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
