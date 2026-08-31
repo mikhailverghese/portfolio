@@ -57,12 +57,13 @@ export default function Home() {
                 </div>
                 <div className="space-y-6">
                   <h1 className="text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl">
-                    Analyst by profession, builder by obsession.
+                    I build the things I wish existed.
                   </h1>
                   <p className="max-w-2xl text-lg leading-8 text-zinc-600 sm:text-xl">
-                    I’m drawn to software, product thinking, and the challenge of turning ideas
-                    into useful, well-crafted tools. This portfolio is where I share the things I
-                    build, explore, and refine outside of the day job.
+                    I’m an analytics engineer who spends a lot of my free time building software.
+                    Most of my projects start the same way: I run into a problem in my own life,
+                    build something to solve it, then keep refining it until it’s useful enough
+                    for someone else too.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-4 pt-2">
