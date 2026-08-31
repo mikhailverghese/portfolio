@@ -67,16 +67,16 @@ export default function Home() {
                     for someone else too.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-4 pt-2">
+                <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:gap-4">
                   <a
                     href="#projects"
-                    className="inline-flex h-12 items-center justify-center rounded-full bg-zinc-950 px-6 text-sm font-medium text-white transition hover:bg-zinc-800"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
                   >
                     Explore projects
                   </a>
                   <a
                     href="#contact"
-                    className="inline-flex h-12 items-center justify-center rounded-full border border-zinc-300 bg-white/80 px-6 text-sm font-medium text-zinc-900 transition hover:border-zinc-900"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-zinc-300 bg-white/80 px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:border-zinc-900"
                   >
                     Contact me
                   </a>
