@@ -197,17 +197,17 @@ export default function Home() {
                 href="https://www.linkedin.com/in/mikhailverghese/"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium transition hover:bg-zinc-200"
               >
-                LinkedIn
+                <span className="text-zinc-950">LinkedIn</span>
               </a>
               <a
                 href="https://github.com/mikhailverghese"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm font-medium text-white transition hover:border-white/60"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm font-medium transition hover:border-white/60"
               >
-                GitHub
+                <span className="text-white">GitHub</span>
               </a>
             </div>
           </div>
