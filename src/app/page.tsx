@@ -70,9 +70,9 @@ export default function Home() {
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:gap-4">
                   <a
                     href="#projects"
-                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold transition hover:bg-zinc-800"
                   >
-                    Explore projects
+                    <span className="text-white">Explore projects</span>
                   </a>
                   <a
                     href="#contact"
