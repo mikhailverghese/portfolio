@@ -57,7 +57,8 @@ export default function Home() {
                 </div>
                 <div className="space-y-6">
                   <h1 className="text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl">
-                    I build the things I wish existed.
+                    <span className="block">I build the things</span>
+                    <span className="block">I wish existed.</span>
                   </h1>
                   <p className="max-w-2xl text-lg leading-8 text-zinc-600 sm:text-xl">
                     I’m an analytics engineer who spends a lot of my free time building software.
