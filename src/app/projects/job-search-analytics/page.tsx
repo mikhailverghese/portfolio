@@ -89,6 +89,24 @@ export default function JobSearchAnalyticsProjectPage() {
               more targeted and efficient job search process, from opportunity discovery through
               application support.
             </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a
+                href="https://job-checker-seven.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
+              >
+                View Dashboard
+              </a>
+              <a
+                href="https://github.com/mikhailverghese/job-checker"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:border-zinc-900"
+              >
+                View GitHub
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -141,26 +159,7 @@ export default function JobSearchAnalyticsProjectPage() {
                 automation, workflow efficiency
               </p>
               <p>
-                <span className="font-semibold text-white">Live dashboard:</span>{" "}
-                <a
-                  href="https://job-checker-seven.vercel.app"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline decoration-white/30 underline-offset-4 transition hover:decoration-white"
-                >
-                  job-checker-seven.vercel.app
-                </a>
-              </p>
-              <p>
-                <span className="font-semibold text-white">GitHub:</span>{" "}
-                <a
-                  href="https://github.com/mikhailverghese/job-checker"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline decoration-white/30 underline-offset-4 transition hover:decoration-white"
-                >
-                  mikhailverghese/job-checker
-                </a>
+                <span className="font-semibold text-white">Repository:</span> public on GitHub
               </p>
               <p>
                 <span className="font-semibold text-white">Status:</span> live public build
