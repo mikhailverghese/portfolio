@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const highlights = [
   "Analyzes LinkedIn job postings published within the previous 24 hours and ranks them with a configurable recommendation engine.",
-  "Uses a scheduled Python pipeline to pull only newly published postings, refresh the dashboard daily, and reduce duplicate recommendations.",
-  "Includes an n8n workflow that combines candidate profile data with selected job descriptions to generate tailored cover letters through LLM APIs.",
+  "Uses a scheduled Python pipeline to pull only newly published postings, refresh the public dataset, and reduce duplicate recommendations.",
+  "Ships with a live Next.js dashboard and API-backed cover-letter generation flow, including downloadable PDF output.",
 ];
 
 const sections = [
@@ -12,7 +12,7 @@ const sections = [
     title: "What the platform does",
     body: [
       "The Intelligent Job Search Analytics Platform is an automated system for identifying, prioritizing, and acting on relevant LinkedIn job postings. Instead of treating a job search like a manual browsing exercise, it turns the process into something more structured, repeatable, and analytically driven.",
-      "At its core, the platform looks at newly published roles, scores them against configurable rules, and surfaces the strongest opportunities in a web dashboard designed for action rather than noise.",
+      "At its core, the platform looks at newly published roles, scores them against configurable rules, and surfaces the strongest opportunities in a live web dashboard designed for action rather than noise.",
     ],
   },
   {
@@ -43,16 +43,16 @@ const sections = [
     label: "Pipeline design",
     title: "How the dashboard stays current",
     body: [
-      "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. That design keeps the dashboard focused on fresh opportunities while reducing repeat surfacing of stale listings.",
-      "By narrowing the retrieval window, storing seen jobs, and refreshing the dashboard continuously, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
+      "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. It exports a public-safe dataset that the dashboard reads directly, which keeps the live site focused on fresh opportunities while reducing repeat surfacing of stale listings.",
+      "By narrowing the retrieval window, storing seen jobs, and refreshing the published dataset on a repeatable cadence, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
     ],
   },
   {
     label: "Application workflow",
     title: "How it supports tailored applications",
     body: [
-      "Beyond ranking and surfacing jobs, the platform also includes an n8n orchestration workflow for application support. It combines structured candidate profile data with selected job descriptions, then uses LLM APIs to generate tailored cover letters.",
-      "The goal is not generic automation for its own sake. The goal is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, making the application process faster without flattening it into copy-paste output.",
+      "Beyond ranking and surfacing jobs, the platform also includes an application support workflow built into the public app. It combines structured candidate profile data with selected job descriptions, then uses an LLM API to generate tailored cover letters on demand.",
+      "The goal is not generic automation for its own sake. The goal is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, then let the user review or download them immediately from the dashboard flow.",
     ],
   },
   {
@@ -130,18 +130,40 @@ export default function JobSearchAnalyticsProjectPage() {
             </ul>
             <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
               <p>
-                <span className="font-semibold text-white">Type:</span> analytics-driven web platform
+                <span className="font-semibold text-white">Type:</span> analytics-driven job search platform
               </p>
               <p>
                 <span className="font-semibold text-white">Core components:</span> LinkedIn search ingestion,
-                rule-based ranking, Python pipeline, web dashboard, n8n workflow, LLM-assisted drafting
+                rule-based ranking, Python pipeline, public dataset export, Next.js dashboard, LLM-assisted drafting
               </p>
               <p>
                 <span className="font-semibold text-white">Focus:</span> job search prioritization,
                 automation, workflow efficiency
               </p>
               <p>
-                <span className="font-semibold text-white">Status:</span> active build / concept evolution
+                <span className="font-semibold text-white">Live dashboard:</span>{" "}
+                <a
+                  href="https://job-checker-seven.vercel.app"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline decoration-white/30 underline-offset-4 transition hover:decoration-white"
+                >
+                  job-checker-seven.vercel.app
+                </a>
+              </p>
+              <p>
+                <span className="font-semibold text-white">GitHub:</span>{" "}
+                <a
+                  href="https://github.com/mikhailverghese/job-checker"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline decoration-white/30 underline-offset-4 transition hover:decoration-white"
+                >
+                  mikhailverghese/job-checker
+                </a>
+              </p>
+              <p>
+                <span className="font-semibold text-white">Status:</span> live public build
               </p>
             </div>
           </div>

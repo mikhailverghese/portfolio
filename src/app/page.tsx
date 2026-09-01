@@ -12,8 +12,8 @@ const featuredProjects = [
     name: "Intelligent Job Search Analytics Platform",
     href: "/projects/job-search-analytics",
     summary:
-      "A web dashboard for organizing job search activity, tracking progress, and turning scattered effort into structured insight.",
-    tags: ["Web App", "Analytics", "Dashboard", "Workflow Design"],
+      "A public job dashboard that ranks fresh LinkedIn roles, surfaces the strongest matches, and generates tailored cover letters in a live workflow.",
+    tags: ["Next.js", "Analytics", "Dashboard", "Automation"],
   },
   {
     name: "Bitebook",
