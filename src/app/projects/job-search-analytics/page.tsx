@@ -16,11 +16,27 @@ const sections = [
     ],
   },
   {
+    label: "Search workflow",
+    title: "How the search process begins",
+    body: [
+      "The workflow begins with a defined set of target search titles. The current configuration uses four: Analytics Engineer, BI Engineer, BI Analyst, and Data Analyst.",
+      "For each of those search titles, the system reviews up to 50 LinkedIn results and limits the dataset to roles published within the previous 24 hours. That keeps the search targeted, current, and grounded in a repeatable intake process rather than ad hoc browsing.",
+    ],
+  },
+  {
     label: "Recommendation engine",
     title: "How job opportunities are ranked",
     body: [
-      "The ranking logic is driven by a configurable rule-based recommendation engine. Each posting is evaluated using weighted positive and negative keywords, job title relevance, location preferences, and customizable scoring thresholds.",
-      "That makes the system flexible enough to reflect changing priorities while still keeping the output disciplined. Instead of producing a generic feed, it produces a prioritized list of opportunities shaped around the candidate's actual targeting logic.",
+      "The ranking logic is driven by a configurable rule-based recommendation engine. Jobs are evaluated across multiple criteria, including title signals, description keywords, location preferences, and configurable scoring thresholds.",
+      "The current setup uses weighted positive and negative matches. Positive examples include terms like Python, SQL, dbt, BigQuery, and Power BI. Negative examples include terms like Kafka, Airflow, Spark, Databricks, DAX, JavaScript, and machine learning. The idea is to reward the strongest-fit postings while pushing less relevant roles down the list.",
+    ],
+  },
+  {
+    label: "Scoring criteria",
+    title: "What the engine looks at",
+    body: [
+      "The scoring model does not rely on just one field. It incorporates keyword logic from the job description, title-based rules, and location-based preferences. In the active configuration, location is explicitly part of the scoring logic, with positive weighting for places like Piscataway, New Brunswick, Princeton, Rahway, Iselin, and Edison, while also allowing remote roles.",
+      "The system also uses thresholding to control quality, including a minimum score requirement and a minimum number of positive matches before a role is surfaced. That helps the dashboard stay focused on opportunities that are both recent and genuinely relevant.",
     ],
   },
   {
@@ -28,7 +44,7 @@ const sections = [
     title: "How the dashboard stays current",
     body: [
       "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. That design keeps the dashboard focused on fresh opportunities while reducing repeat surfacing of stale listings.",
-      "By narrowing the retrieval window and refreshing the dashboard continuously, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
+      "By narrowing the retrieval window, storing seen jobs, and refreshing the dashboard continuously, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
     ],
   },
   {
@@ -117,8 +133,8 @@ export default function JobSearchAnalyticsProjectPage() {
                 <span className="font-semibold text-white">Type:</span> analytics-driven web platform
               </p>
               <p>
-                <span className="font-semibold text-white">Core components:</span> rule-based ranking,
-                Python pipeline, web dashboard, n8n workflow, LLM-assisted drafting
+                <span className="font-semibold text-white">Core components:</span> LinkedIn search ingestion,
+                rule-based ranking, Python pipeline, web dashboard, n8n workflow, LLM-assisted drafting
               </p>
               <p>
                 <span className="font-semibold text-white">Focus:</span> job search prioritization,
