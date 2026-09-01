@@ -5,7 +5,7 @@ const featuredProjects = [
     name: "Centful",
     href: "/projects/centful",
     summary:
-      "An iOS expense tracker built to make personal finance feel clearer, calmer, and more thoughtfully designed.",
+      "An iOS expense tracker built to make personal finance feel more intuitive, less cluttered, and better designed.",
     tags: ["iOS", "React Native", "Plaid", "Product Design"],
   },
   {
@@ -181,7 +181,7 @@ export default function Home() {
             </p>
             <p>
               I’m especially interested in projects that begin with a real personal frustration and
-              turn into something cleaner, calmer, and more useful through iteration.
+              turn into something more refined, more usable, and more valuable through iteration.
             </p>
           </div>
         </div>

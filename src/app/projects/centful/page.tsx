@@ -2,14 +2,14 @@ import Link from "next/link";
 
 const highlights = [
   "Built as a personal response to the friction and clutter common in everyday finance tools.",
-  "Focused on transaction clarity, thoughtful interaction design, and calmer mobile UX.",
+  "Focused on transaction clarity, thoughtful interaction design, and a more composed mobile experience.",
   "Designed as an ongoing product, not just a one-off interface exercise.",
 ];
 
 const principles = [
   {
     title: "Clarity over clutter",
-    body: "Financial software often tries to do too much at once. Centful pushes in the other direction by prioritizing readability, hierarchy, and a calmer sense of focus.",
+    body: "Financial software often tries to do too much at once. Centful pushes in the other direction by prioritizing readability, hierarchy, and a stronger sense of focus.",
   },
   {
     title: "Design as product logic",
@@ -38,7 +38,7 @@ export default function CentfulProjectPage() {
               Centful
             </p>
             <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              Reimagining personal finance software as something calmer, clearer, and more useful.
+              Reimagining personal finance software as something more intuitive, focused, and genuinely useful.
             </h1>
             <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
               Centful is an iOS expense tracker built around a simple belief: money tools do not
