@@ -1,34 +1,50 @@
 import Link from "next/link";
 
 const highlights = [
-  "Built to bring structure to a process that is usually fragmented across notes, spreadsheets, job boards, and email.",
-  "Combines workflow design with analytics thinking to make progress easier to measure and act on.",
-  "Treats the job search as an operating system problem, not just a list of applications.",
+  "Analyzes LinkedIn job postings published within the previous 24 hours and ranks them with a configurable recommendation engine.",
+  "Uses a scheduled Python pipeline to pull only newly published postings, refresh the dashboard daily, and reduce duplicate recommendations.",
+  "Includes an n8n workflow that combines candidate profile data with selected job descriptions to generate tailored cover letters through LLM APIs.",
 ];
 
 const sections = [
   {
-    label: "Problem",
-    title: "Why I built it",
+    label: "Overview",
+    title: "What the platform does",
     body: [
-      "A job search can become messy fast. Applications live in one place, recruiter conversations in another, follow-ups in another, and over time it becomes harder to tell what is actually working.",
-      "This project started as a way to create more structure around that process, not just to record activity, but to turn the search into something that could be reviewed, managed, and improved with better visibility.",
+      "The Intelligent Job Search Analytics Platform is an automated system for identifying, prioritizing, and acting on relevant LinkedIn job postings. Instead of treating a job search like a manual browsing exercise, it turns the process into something more structured, repeatable, and analytically driven.",
+      "At its core, the platform looks at newly published roles, scores them against configurable rules, and surfaces the strongest opportunities in a web dashboard designed for action rather than noise.",
     ],
   },
   {
-    label: "Approach",
-    title: "How I think about the product",
+    label: "Recommendation engine",
+    title: "How job opportunities are ranked",
     body: [
-      "The core idea is that the job search should feel more like a decision-making system than a pile of manual admin. That means organizing applications, status changes, follow-ups, and patterns in a way that supports better judgment.",
-      "The dashboard is meant to reduce mental overhead, surface useful signals, and create a more intentional workflow around an otherwise stressful process.",
+      "The ranking logic is driven by a configurable rule-based recommendation engine. Each posting is evaluated using weighted positive and negative keywords, job title relevance, location preferences, and customizable scoring thresholds.",
+      "That makes the system flexible enough to reflect changing priorities while still keeping the output disciplined. Instead of producing a generic feed, it produces a prioritized list of opportunities shaped around the candidate's actual targeting logic.",
     ],
   },
   {
-    label: "What it shows",
-    title: "Why it belongs in the portfolio",
+    label: "Pipeline design",
+    title: "How the dashboard stays current",
     body: [
-      "This project reflects the overlap between analytics and product thinking in a way that feels very natural to me. It is not just about tracking data, it is about designing a system that makes the data more actionable.",
-      "It also shows how I approach messy real-world problems by building structure around them, then refining the experience until it becomes genuinely useful.",
+      "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. That design keeps the dashboard focused on fresh opportunities while reducing repeat surfacing of stale listings.",
+      "By narrowing the retrieval window and refreshing the dashboard continuously, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
+    ],
+  },
+  {
+    label: "Application workflow",
+    title: "How it supports tailored applications",
+    body: [
+      "Beyond ranking and surfacing jobs, the platform also includes an n8n orchestration workflow for application support. It combines structured candidate profile data with selected job descriptions, then uses LLM APIs to generate tailored cover letters.",
+      "The goal is not generic automation for its own sake. The goal is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, making the application process faster without flattening it into copy-paste output.",
+    ],
+  },
+  {
+    label: "Why it matters",
+    title: "What this project shows",
+    body: [
+      "This project sits at a useful intersection of analytics, workflow design, and applied automation. It shows how structured logic, data pipelines, and orchestration tools can work together to improve a messy real-world process.",
+      "It also reflects the kind of systems I like building: practical tools that reduce noise, clarify priorities, and help people move from raw information to better decisions.",
     ],
   },
 ];
@@ -50,12 +66,12 @@ export default function JobSearchAnalyticsProjectPage() {
               Intelligent Job Search Analytics Platform
             </p>
             <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              Turning a scattered job search into a system that is easier to track, review, and improve.
+              An automated job search system for finding, ranking, and acting on the right opportunities faster.
             </h1>
             <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              This project is a web dashboard built around a simple idea: job searching creates a
-              lot of fragmented information, and better structure can turn that chaos into
-              something more useful.
+              This project brings together analytics, automation, and workflow design to create a
+              more targeted and efficient job search process, from opportunity discovery through
+              application support.
             </p>
           </div>
         </div>
@@ -98,18 +114,18 @@ export default function JobSearchAnalyticsProjectPage() {
             </ul>
             <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
               <p>
-                <span className="font-semibold text-white">Type:</span> web dashboard
+                <span className="font-semibold text-white">Type:</span> analytics-driven web platform
               </p>
               <p>
-                <span className="font-semibold text-white">Focus:</span> workflow design,
-                analytics, job search organization
+                <span className="font-semibold text-white">Core components:</span> rule-based ranking,
+                Python pipeline, web dashboard, n8n workflow, LLM-assisted drafting
               </p>
               <p>
-                <span className="font-semibold text-white">Role:</span> product thinking,
-                systems design, software build
+                <span className="font-semibold text-white">Focus:</span> job search prioritization,
+                automation, workflow efficiency
               </p>
               <p>
-                <span className="font-semibold text-white">Status:</span> active concept / build
+                <span className="font-semibold text-white">Status:</span> active build / concept evolution
               </p>
             </div>
           </div>
