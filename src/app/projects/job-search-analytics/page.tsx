@@ -94,17 +94,17 @@ export default function JobSearchAnalyticsProjectPage() {
                 href="https://job-checker-seven.vercel.app"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold transition hover:bg-zinc-800"
               >
-                View Dashboard
+                <span className="text-white">View Dashboard</span>
               </a>
               <a
                 href="https://github.com/mikhailverghese/job-checker"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:border-zinc-900"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold transition hover:border-zinc-900"
               >
-                View GitHub
+                <span className="text-zinc-900">View GitHub</span>
               </a>
             </div>
           </div>
