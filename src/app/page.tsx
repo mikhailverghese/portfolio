@@ -1,18 +1,23 @@
+import Link from "next/link";
+
 const featuredProjects = [
   {
     name: "Centful",
+    href: "/projects/centful",
     summary:
       "An iOS expense tracker built to make personal finance feel clearer, calmer, and more thoughtfully designed.",
     tags: ["iOS", "React Native", "Plaid", "Product Design"],
   },
   {
     name: "Intelligent Job Search Analytics Platform",
+    href: "/projects/job-search-analytics",
     summary:
       "A web dashboard for organizing job search activity, tracking progress, and turning scattered effort into structured insight.",
     tags: ["Web App", "Analytics", "Dashboard", "Workflow Design"],
   },
   {
     name: "Bitebook",
+    href: "/projects/bitebook",
     summary:
       "A food-focused product concept centered on discovery, organization, and a better experience around places worth remembering.",
     tags: ["Product Concept", "UX", "Consumer App", "Exploration"],
@@ -119,21 +124,27 @@ export default function Home() {
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-7 text-zinc-600 sm:text-base">
-            This first pass is intentionally simple. The structure is here so we can swap in real
-            project stories, screenshots, metrics, and deeper case studies next.
+            Each project starts with a real problem, then gets shaped through iteration, product
+            thinking, and a bias toward making useful things feel genuinely good to use.
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {featuredProjects.map((project) => (
-            <article
+            <Link
               key={project.name}
-              className="flex h-full flex-col rounded-[1.75rem] border border-black/8 bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
+              href={project.href}
+              className="group flex h-full flex-col rounded-[1.75rem] border border-black/8 bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)] transition duration-200 hover:-translate-y-1 hover:border-black/12 hover:shadow-[0_18px_60px_rgba(15,23,42,0.1)]"
             >
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold tracking-tight text-zinc-950">
-                  {project.name}
-                </h3>
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="text-2xl font-semibold tracking-tight text-zinc-950">
+                    {project.name}
+                  </h3>
+                  <span className="text-sm text-zinc-400 transition group-hover:text-zinc-700">
+                    ↗
+                  </span>
+                </div>
                 <p className="text-sm leading-7 text-zinc-600 sm:text-base">
                   {project.summary}
                 </p>
@@ -148,7 +159,7 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
@@ -160,18 +171,17 @@ export default function Home() {
               About
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
-              Strong taste, clear communication, and a bias toward maintainable execution.
+              I like building practical things with strong structure and clear intent.
             </h2>
           </div>
           <div className="space-y-6 text-base leading-8 text-zinc-600">
             <p>
-              The goal is not to make a loud portfolio. The goal is to make one that feels
-              thoughtful, modern, and confident, with enough flexibility to evolve into richer
-              storytelling over time.
+              My background is in analytics, but a lot of my free time ends up in software,
+              product ideas, workflow design, and refining things until they feel right.
             </p>
             <p>
-              That means this site can grow into detailed project pages, visual case studies,
-              writing, and interactive experiments without needing a rebuild from scratch.
+              I’m especially interested in projects that begin with a real personal frustration and
+              turn into something cleaner, calmer, and more useful through iteration.
             </p>
           </div>
         </div>
