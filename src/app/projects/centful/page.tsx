@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { CentfulHeroSlider } from "@/components/CentfulHeroSlider";
+
 const highlights = [
   "Built as a personal finance app with direct bank connectivity, review workflows, and category management.",
   "Designed around a calmer mobile experience, with dark visual treatment, clear hierarchy, and focused day-to-day actions.",
@@ -22,19 +24,31 @@ const principles = [
   },
 ];
 
-const gallery = [
+const heroSlides = [
   {
     title: "Home dashboard",
     description:
-      "The landing screen is intentionally simple: current-month spend, category breakdown, and direct access to the review queue and account sync flow.",
+      "A simple landing screen focused on current-month spend, category visibility, and the two actions that matter most: reviewing transactions and syncing accounts.",
     image: "/images/centful/home.png",
+    alt: "Centful home dashboard showing current-month spend, review queue, and account shortcuts.",
   },
   {
-    title: "Accounts and Plaid sync",
+    title: "Review queue",
     description:
-      "Linked accounts are visible in one place, alongside the Plaid connection path and recent sync activity. The goal is to make ingestion status feel transparent instead of hidden behind setup screens.",
-    image: "/images/centful/accounts.png",
+      "A dedicated queue for uncategorized spend, with AI-assisted categorization layered on top of the rule-based workflow instead of replacing it.",
+    image: "/images/centful/review-queue.png",
+    alt: "Centful review queue with uncategorized transactions and AI-assisted categorization controls.",
   },
+  {
+    title: "Accounts",
+    description:
+      "Account linking and sync management live in one place, so the ingestion side of the product feels inspectable rather than hidden.",
+    image: "/images/centful/accounts.png",
+    alt: "Centful accounts screen with linked credit cards and bank accounts.",
+  },
+];
+
+const gallery = [
   {
     title: "Sync history",
     description:
@@ -46,12 +60,6 @@ const gallery = [
     description:
       "Transaction browsing includes a mobile-friendly date-range sheet with quick filters like this month, last month, last 30 days, and this year.",
     image: "/images/centful/date-filter.png",
-  },
-  {
-    title: "Review queue",
-    description:
-      "Unassigned transactions are surfaced in a dedicated review workflow, with support for AI-assisted categorization after rule-based passes run first.",
-    image: "/images/centful/review-queue.png",
   },
   {
     title: "Settings and personalization",
@@ -93,44 +101,7 @@ export default function CentfulProjectPage() {
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[2rem] border border-black/8 bg-zinc-950 p-4 shadow-[0_24px_80px_rgba(24,24,27,0.16)]">
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                <Image
-                  src="/images/centful/home.png"
-                  alt="Centful home dashboard showing current-month spend, review queue, and account shortcuts."
-                  width={1179}
-                  height={2556}
-                  className="h-auto w-full"
-                  priority
-                />
-              </div>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)] sm:translate-y-8">
-                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
-                  <Image
-                    src="/images/centful/review-queue.png"
-                    alt="Centful review queue with uncategorized transactions and AI-assisted categorization controls."
-                    width={1179}
-                    height={2556}
-                    className="h-auto w-full"
-                  />
-                </div>
-              </div>
-              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)]">
-                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
-                  <Image
-                    src="/images/centful/accounts.png"
-                    alt="Centful accounts screen with linked credit cards and bank accounts."
-                    width={1179}
-                    height={2556}
-                    className="h-auto w-full"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <CentfulHeroSlider slides={heroSlides} />
         </div>
       </section>
 
