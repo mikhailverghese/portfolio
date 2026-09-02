@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+
+import { CursorGlow } from "@/components/CursorGlow";
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,18 +16,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "A portfolio website for projects, work, and experiments.",
+  title: "Mikhail Verghese — Portfolio",
+  description:
+    "Analytics engineer and product-minded builder. Case studies in software, data, and interaction design.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full scroll-smooth`}
     >
-      <body className="min-h-full bg-white text-zinc-950 antialiased">{children}</body>
+      <body className="min-h-full bg-ink-950 text-zinc-100 antialiased">
+        <CursorGlow />
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,7 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "next";
 
-import { BitebookHeroSlider } from "@/components/BitebookHeroSlider";
+import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import {
+  BackLink,
+  GalleryItem,
+  NextProject,
+  SectionCard,
+  SnapshotAside,
+} from "@/components/case-study";
+import { Reveal } from "@/components/motion/Reveal";
+
+export const metadata: Metadata = {
+  title: "Bitebook — Mikhail Verghese",
+  description:
+    "A recipe product built around saving what works, remixing what doesn't, and cooking with more confidence.",
+};
 
 const highlights = [
   "Built as a recipe product centered on saving, remixing, organizing, and revisiting dishes people actually want to cook.",
@@ -9,7 +23,18 @@ const highlights = [
   "Shows a more lifestyle-oriented product instinct while still grounding the experience in concrete workflows and interface systems.",
 ];
 
-const heroSlides = [
+const meta = [
+  { label: "Type", value: "iOS app" },
+  {
+    label: "Core components",
+    value: "Recipe discovery, recipe creation, ingredient library, nutrition controls, lists, account flows",
+  },
+  { label: "Focus", value: "Cooking workflow, organization, personalization, product design" },
+  { label: "Role", value: "Concept development, product thinking, interface direction" },
+  { label: "Status", value: "Active build" },
+];
+
+const heroSlides: HeroSlide[] = [
   {
     title: "Log In",
     image: "/images/bitebook/summary.png",
@@ -120,121 +145,101 @@ const gallery = [
 
 export default function BitebookProjectPage() {
   return (
-    <main className="min-h-screen bg-[#f5f3ef] text-zinc-950">
-      <section className="border-b border-black/5 bg-white">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 py-20 sm:px-10 lg:px-12">
-          <Link
-            href="/"
-            className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-900 hover:text-zinc-950"
-          >
-            ← Back to portfolio
-          </Link>
+    <main className="min-h-screen bg-ink-950 text-zinc-100">
+      <ScrollProgress />
+
+      {/* ---------- hero ---------- */}
+      <section className="noise-overlay relative overflow-hidden border-b border-white/5">
+        <div aria-hidden className="grid-lines absolute inset-0" />
+        <div
+          aria-hidden
+          className="animate-aurora-b pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-rose-400/10 blur-[130px]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-30%] left-[-10%] h-[420px] w-[420px] rounded-full bg-amber-400/10 blur-[120px]"
+        />
+
+        <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 pb-20 pt-32 sm:px-10 lg:px-12">
+          <BackLink />
 
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Bitebook
-            </p>
-            <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              A recipe product built around saving what works, remixing what doesn&apos;t, and cooking with more confidence.
-            </h1>
-            <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              Bitebook is a consumer recipe app concept that explores how discovery, creation,
-              nutrition, organization, and personal taste can live together in a more useful cooking product.
-            </p>
+            <Reveal y={16}>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
+                Bitebook
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-zinc-50 sm:text-6xl">
+                A recipe product built around saving what works, remixing what doesn&apos;t, and
+                cooking with <span className="font-serif italic text-gradient">more confidence</span>.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl sm:leading-9">
+                Bitebook is a consumer recipe app concept that explores how discovery, creation,
+                nutrition, organization, and personal taste can live together in a more useful
+                cooking product.
+              </p>
+            </Reveal>
           </div>
 
-          <BitebookHeroSlider slides={heroSlides} />
+          <Reveal delay={0.3} y={40}>
+            <HeroSlider slides={heroSlides} imageWidth={1179} imageHeight={2556} />
+          </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-16 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
+      {/* ---------- body ---------- */}
+      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
         <div className="space-y-8">
-          {sections.map((section) => (
-            <div
-              key={section.title}
-              className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                {section.label}
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
-              <div className="space-y-4 text-base leading-8 text-zinc-600">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+          {sections.map((section, i) => (
+            <SectionCard key={section.title} index={i + 1} label={section.label} title={section.title}>
+              {section.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </SectionCard>
+          ))}
+
+          <Reveal>
+            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
+              <div className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-xs text-emerald-300">05</span>
+                  <span className="h-px w-8 bg-white/15" />
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+                    Product walkthrough
+                  </p>
+                </div>
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
+                  How the Bitebook experience comes together
+                </h2>
+              </div>
+
+              <div className="space-y-6">
+                {gallery.map((item, i) => (
+                  <GalleryItem
+                    key={item.title}
+                    index={i + 1}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                    imageWidth={1179}
+                    imageHeight={2556}
+                  />
                 ))}
               </div>
             </div>
-          ))}
+          </Reveal>
 
-          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                Product walkthrough
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">How the Bitebook experience comes together</h2>
-            </div>
-
-            <div className="space-y-8">
-              {gallery.map((item) => (
-                <div key={item.title} className="grid gap-5 rounded-[1.5rem] border border-black/6 bg-zinc-50/70 p-5 md:grid-cols-[0.78fr_1.22fr] md:items-center">
-                  <div className="mx-auto w-full max-w-[260px] rounded-[1.5rem] border border-black/10 bg-zinc-950 p-3 shadow-[0_16px_40px_rgba(24,24,27,0.12)]">
-                    <div className="overflow-hidden rounded-[1.2rem] border border-white/10 bg-black">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={1179}
-                        height={2556}
-                        className="h-auto w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold tracking-tight text-zinc-950">{item.title}</h3>
-                    <p className="text-base leading-8 text-zinc-600">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <NextProject
+            name="Job Search Analytics"
+            href="/projects/job-search-analytics"
+            blurb="An automated job search system for finding, ranking, and acting on the right opportunities faster."
+          />
         </div>
 
-        <aside className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-7 text-white shadow-[0_20px_80px_rgba(24,24,27,0.18)]">
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-400">
-                Snapshot
-              </p>
-            </div>
-            <ul className="space-y-4 text-sm leading-7 text-zinc-300">
-              {highlights.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
-              <p>
-                <span className="font-semibold text-white">Type:</span> iOS app
-              </p>
-              <p>
-                <span className="font-semibold text-white">Core components:</span> recipe discovery,
-                recipe creation, ingredient library, nutrition controls, lists, account flows
-              </p>
-              <p>
-                <span className="font-semibold text-white">Focus:</span> cooking workflow,
-                organization, personalization, product design
-              </p>
-              <p>
-                <span className="font-semibold text-white">Role:</span> concept development,
-                product thinking, interface direction
-              </p>
-              <p>
-                <span className="font-semibold text-white">Status:</span> active build
-              </p>
-            </div>
-          </div>
-        </aside>
+        <SnapshotAside highlights={highlights} meta={meta} />
       </section>
     </main>
   );

@@ -1,12 +1,38 @@
-import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "next";
 
-import { CentfulHeroSlider } from "@/components/CentfulHeroSlider";
+import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import {
+  BackLink,
+  GalleryItem,
+  NextProject,
+  SectionCard,
+  SnapshotAside,
+} from "@/components/case-study";
+import { Reveal } from "@/components/motion/Reveal";
+
+export const metadata: Metadata = {
+  title: "Centful — Mikhail Verghese",
+  description:
+    "A personal finance app built to make spending review feel calmer, clearer, and more usable.",
+};
 
 const highlights = [
   "Built as a personal finance app with direct bank connectivity, review workflows, category management, and merchant-rule automation.",
   "Designed around a calmer mobile experience, with dark visual treatment, clear hierarchy, and focused day-to-day actions.",
   "Pairs product thinking with implementation detail, from Plaid-linked accounts to regex-based transaction rules and AI-assisted rule creation.",
+];
+
+const meta = [
+  { label: "Type", value: "iOS app" },
+  {
+    label: "Core components",
+    value:
+      "Plaid account linking, transaction ingestion, review queue, regex merchant rules, AI-assisted rule creation, category management",
+  },
+  { label: "Focus", value: "Personal finance, transaction clarity, interaction design" },
+  { label: "Role", value: "Product thinking, design direction, software build" },
+  { label: "Status", value: "Active build" },
 ];
 
 const principles = [
@@ -24,7 +50,7 @@ const principles = [
   },
 ];
 
-const heroSlides = [
+const heroSlides: HeroSlide[] = [
   {
     title: "Home",
     description:
@@ -89,178 +115,146 @@ const gallery = [
 
 export default function CentfulProjectPage() {
   return (
-    <main className="min-h-screen bg-[#f5f3ef] text-zinc-950">
-      <section className="border-b border-black/5 bg-white">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 py-20 sm:px-10 lg:px-12">
-          <Link
-            href="/"
-            className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-900 hover:text-zinc-950"
-          >
-            ← Back to portfolio
-          </Link>
+    <main className="min-h-screen bg-ink-950 text-zinc-100">
+      <ScrollProgress />
+
+      {/* ---------- hero ---------- */}
+      <section className="noise-overlay relative overflow-hidden border-b border-white/5">
+        <div aria-hidden className="grid-lines absolute inset-0" />
+        <div
+          aria-hidden
+          className="animate-aurora-a pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-emerald-500/12 blur-[130px]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-30%] left-[-10%] h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[120px]"
+        />
+
+        <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 pb-20 pt-32 sm:px-10 lg:px-12">
+          <BackLink />
 
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Centful
-            </p>
-            <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              A personal finance app built to make spending review feel calmer, clearer, and more usable.
-            </h1>
-            <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              Centful is an iOS expense tracker that combines account syncing, transaction review,
-              category management, and a more considered interaction model for everyday money
-              decisions.
-            </p>
+            <Reveal y={16}>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
+                Centful
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-zinc-50 sm:text-6xl">
+                A personal finance app built to make spending review feel{" "}
+                <span className="font-serif italic text-gradient">calmer, clearer</span>, and more
+                usable.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl sm:leading-9">
+                Centful is an iOS expense tracker that combines account syncing, transaction review,
+                category management, and a more considered interaction model for everyday money
+                decisions.
+              </p>
+            </Reveal>
           </div>
 
-          <CentfulHeroSlider slides={heroSlides} />
+          <Reveal delay={0.3} y={40}>
+            <HeroSlider slides={heroSlides} imageWidth={1179} imageHeight={2556} />
+          </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-16 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
+      {/* ---------- body ---------- */}
+      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
         <div className="space-y-8">
-          <div className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Problem
+          <SectionCard index={1} label="Problem" title="Why I built it">
+            <p>
+              Most personal finance apps either bury the important actions under too much clutter
+              or reduce the experience to a bare utility that feels unpleasant to use repeatedly.
+              Centful started as a response to that gap.
             </p>
-            <h2 className="text-2xl font-semibold tracking-tight">Why I built it</h2>
-            <div className="space-y-4 text-base leading-8 text-zinc-600">
-              <p>
-                Most personal finance apps either bury the important actions under too much clutter
-                or reduce the experience to a bare utility that feels unpleasant to use repeatedly.
-                Centful started as a response to that gap.
-              </p>
-              <p>
-                The goal was to build something that handled the practical job of transaction
-                tracking while still feeling composed, inspectable, and usable enough to become part
-                of a real routine.
-              </p>
-            </div>
-          </div>
+            <p>
+              The goal was to build something that handled the practical job of transaction
+              tracking while still feeling composed, inspectable, and usable enough to become part
+              of a real routine.
+            </p>
+          </SectionCard>
 
-          <div className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Product scope
+          <SectionCard index={2} label="Product scope" title="What the app actually does">
+            <p>
+              Centful is not just a static budgeting concept. The app includes linked account
+              management, Plaid-based syncing, a review queue for uncategorized spend, merchant
+              rule personalization, regex-based auto-categorization, category editing, and
+              transaction browsing with date-range filtering.
             </p>
-            <h2 className="text-2xl font-semibold tracking-tight">What the app actually does</h2>
-            <div className="space-y-4 text-base leading-8 text-zinc-600">
-              <p>
-                Centful is not just a static budgeting concept. The app includes linked account
-                management, Plaid-based syncing, a review queue for uncategorized spend, merchant
-                rule personalization, regex-based auto-categorization, category editing, and
-                transaction browsing with date-range filtering.
-              </p>
-              <p>
-                That matters because the product story is grounded in real workflows, not just mock
-                screens. The interface and data model are being shaped together.
-              </p>
-            </div>
-          </div>
+            <p>
+              That matters because the product story is grounded in real workflows, not just mock
+              screens. The interface and data model are being shaped together.
+            </p>
+          </SectionCard>
 
-          <div className="space-y-5 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Product principles
-            </p>
-            <div className="space-y-6">
+          <SectionCard index={3} label="Product principles" title="How I think about the product">
+            <div className="space-y-7">
               {principles.map((principle) => (
                 <div key={principle.title} className="space-y-2">
-                  <h3 className="text-xl font-semibold tracking-tight text-zinc-950">
+                  <h3 className="text-lg font-semibold tracking-tight text-zinc-50">
                     {principle.title}
                   </h3>
-                  <p className="text-base leading-8 text-zinc-600">{principle.body}</p>
+                  <p>{principle.body}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </SectionCard>
 
-          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                Product walkthrough
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">How the experience comes together</h2>
-            </div>
-
-            <div className="space-y-8">
-              {gallery.map((item) => (
-                <div key={item.title} className="grid gap-5 rounded-[1.5rem] border border-black/6 bg-zinc-50/70 p-5 md:grid-cols-[0.78fr_1.22fr] md:items-center">
-                  <div className="mx-auto w-full max-w-[260px] rounded-[1.5rem] border border-black/10 bg-zinc-950 p-3 shadow-[0_16px_40px_rgba(24,24,27,0.12)]">
-                    <div className="overflow-hidden rounded-[1.2rem] border border-white/10 bg-black">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={1179}
-                        height={2556}
-                        className="h-auto w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold tracking-tight text-zinc-950">{item.title}</h3>
-                    <p className="text-base leading-8 text-zinc-600">{item.description}</p>
-                  </div>
+          <Reveal>
+            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
+              <div className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-xs text-emerald-300">04</span>
+                  <span className="h-px w-8 bg-white/15" />
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+                    Product walkthrough
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
+                  How the experience comes together
+                </h2>
+              </div>
 
-          <div className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              What this project shows
+              <div className="space-y-6">
+                {gallery.map((item, i) => (
+                  <GalleryItem
+                    key={item.title}
+                    index={i + 1}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                    imageWidth={1179}
+                    imageHeight={2556}
+                  />
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <SectionCard index={5} label="What this project shows" title="Why it matters">
+            <p>
+              Centful shows how I like to build products: start with a real friction point,
+              define the workflow that actually matters, and keep tightening the system until the
+              result feels substantially better than the default tools.
             </p>
-            <div className="space-y-4 text-base leading-8 text-zinc-600">
-              <p>
-                Centful shows how I like to build products: start with a real friction point,
-                define the workflow that actually matters, and keep tightening the system until the
-                result feels substantially better than the default tools.
-              </p>
-              <p>
-                It also reflects a pattern I care about a lot, which is that useful software is not
-                only about features. It is also about trust, legibility, and how a product behaves
-                when someone returns to it every day.
-              </p>
-            </div>
-          </div>
+            <p>
+              It also reflects a pattern I care about a lot, which is that useful software is not
+              only about features. It is also about trust, legibility, and how a product behaves
+              when someone returns to it every day.
+            </p>
+          </SectionCard>
+
+          <NextProject
+            name="Bitebook"
+            href="/projects/bitebook"
+            blurb="A recipe product built around saving what works, remixing what doesn't, and cooking with more confidence."
+          />
         </div>
 
-        <aside className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-7 text-white shadow-[0_20px_80px_rgba(24,24,27,0.18)]">
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-400">
-                Snapshot
-              </p>
-            </div>
-            <ul className="space-y-4 text-sm leading-7 text-zinc-300">
-              {highlights.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
-              <p>
-                <span className="font-semibold text-white">Type:</span> iOS app
-              </p>
-              <p>
-                <span className="font-semibold text-white">Core components:</span> Plaid account linking,
-                transaction ingestion, review queue, regex merchant rules, AI-assisted rule creation,
-                category management
-              </p>
-              <p>
-                <span className="font-semibold text-white">Focus:</span> personal finance,
-                transaction clarity, interaction design
-              </p>
-              <p>
-                <span className="font-semibold text-white">Role:</span> product thinking,
-                design direction, software build
-              </p>
-              <p>
-                <span className="font-semibold text-white">Status:</span> active build
-              </p>
-            </div>
-          </div>
-        </aside>
+        <SnapshotAside highlights={highlights} meta={meta} />
       </section>
     </main>
   );

@@ -1,7 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "next";
 
-import { JobDashboardHeroSlider } from "@/components/JobDashboardHeroSlider";
+import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { MagneticLink } from "@/components/MagneticLink";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import {
+  BackLink,
+  GalleryItem,
+  NextProject,
+  SectionCard,
+  SnapshotAside,
+} from "@/components/case-study";
+import { Reveal } from "@/components/motion/Reveal";
+
+export const metadata: Metadata = {
+  title: "Intelligent Job Search Analytics Platform — Mikhail Verghese",
+  description:
+    "An automated job search system for finding, ranking, and acting on the right opportunities faster.",
+};
 
 type ScoringConfig = {
   weights?: {
@@ -18,7 +33,19 @@ const highlights = [
   "Ships with a live Next.js dashboard and API-backed cover-letter generation with direct PDF download.",
 ];
 
-const heroSlides = [
+const meta = [
+  { label: "Type", value: "Analytics-driven job search platform" },
+  {
+    label: "Core components",
+    value:
+      "LinkedIn search ingestion, rule-based ranking, Python pipeline, public dataset export, Next.js dashboard, LLM-assisted drafting",
+  },
+  { label: "Focus", value: "Job search prioritization, automation, workflow efficiency" },
+  { label: "Repository", value: "Public on GitHub" },
+  { label: "Status", value: "Live public build" },
+];
+
+const heroSlides: HeroSlide[] = [
   {
     title: "Summary",
     image: "/images/job-checker/hero-mobile.png",
@@ -152,9 +179,9 @@ function renderKeywordEntries(entries: Record<string, number> | undefined, tone:
       {Object.entries(entries).map(([term, score]) => (
         <span
           key={`${tone}-${term}`}
-          className={`rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] ${tone === "positive"
-            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-            : "border-rose-200 bg-rose-50 text-rose-700"
+          className={`rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] transition-colors duration-300 ${tone === "positive"
+            ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-300 hover:border-emerald-300/50"
+            : "border-rose-400/25 bg-rose-400/10 text-rose-300 hover:border-rose-300/50"
             }`}
         >
           {term} ({score > 0 ? `+${score}` : score})
@@ -170,167 +197,154 @@ export default async function JobSearchAnalyticsProjectPage() {
   const negativeKeywords = scoringConfig?.weights?.negative;
 
   return (
-    <main className="min-h-screen bg-[#f5f3ef] text-zinc-950">
-      <section className="border-b border-black/5 bg-white">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 py-20 sm:px-10 lg:px-12">
-          <Link
-            href="/"
-            className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-900 hover:text-zinc-950"
-          >
-            ← Back to portfolio
-          </Link>
+    <main className="min-h-screen bg-ink-950 text-zinc-100">
+      <ScrollProgress />
+
+      {/* ---------- hero ---------- */}
+      <section className="noise-overlay relative overflow-hidden border-b border-white/5">
+        <div aria-hidden className="grid-lines absolute inset-0" />
+        <div
+          aria-hidden
+          className="animate-aurora-a pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-cyan-500/12 blur-[130px]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-30%] left-[-10%] h-[420px] w-[420px] rounded-full bg-violet-500/12 blur-[120px]"
+        />
+
+        <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 pb-20 pt-32 sm:px-10 lg:px-12">
+          <BackLink />
 
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Intelligent Job Search Analytics Platform
-            </p>
-            <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              An automated job search system for finding, ranking, and acting on the right opportunities faster.
-            </h1>
-            <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              This project brings together analytics, automation, and workflow design to create a
-              more targeted and efficient job search process, from opportunity discovery through
-              application support.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <a
-                href="https://job-checker-seven.vercel.app"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-zinc-950 px-6 py-3 text-sm font-semibold transition hover:bg-zinc-800"
-              >
-                <span className="text-white">View Dashboard</span>
-              </a>
-              <a
-                href="https://github.com/mikhailverghese/job-checker"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold transition hover:border-zinc-900"
-              >
-                <span className="text-zinc-900">View GitHub</span>
-              </a>
-            </div>
+            <Reveal y={16}>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
+                Intelligent Job Search Analytics Platform
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-zinc-50 sm:text-6xl">
+                An automated job search system for finding, ranking, and acting on the{" "}
+                <span className="font-serif italic text-gradient">right opportunities</span> faster.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl sm:leading-9">
+                This project brings together analytics, automation, and workflow design to create a
+                more targeted and efficient job search process, from opportunity discovery through
+                application support.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <div className="flex flex-wrap gap-4 pt-2">
+                <MagneticLink href="https://job-checker-seven.vercel.app" external>
+                  View Dashboard
+                  <span aria-hidden>↗</span>
+                </MagneticLink>
+                <MagneticLink href="https://github.com/mikhailverghese/job-checker" external variant="ghost">
+                  View GitHub
+                  <span aria-hidden>↗</span>
+                </MagneticLink>
+              </div>
+            </Reveal>
           </div>
 
-          <JobDashboardHeroSlider slides={heroSlides} />
+          <Reveal delay={0.35} y={40}>
+            <HeroSlider slides={heroSlides} imageWidth={1106} imageHeight={2266} />
+          </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-16 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
+      {/* ---------- body ---------- */}
+      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
         <div className="space-y-8">
-          {sections.map((section) => (
-            <div
-              key={section.title}
-              className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                {section.label}
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
-              <div className="space-y-4 text-base leading-8 text-zinc-600">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+          {sections.map((section, i) => (
+            <SectionCard key={section.title} index={i + 1} label={section.label} title={section.title}>
+              {section.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </SectionCard>
+          ))}
+
+          <Reveal>
+            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
+              <div className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-xs text-emerald-300">09</span>
+                  <span className="h-px w-8 bg-white/15" />
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+                    Dashboard walkthrough
+                  </p>
+                </div>
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
+                  How the public app presents the workflow
+                </h2>
+              </div>
+
+              <div className="space-y-6">
+                {dashboardGallery.map((item, i) => (
+                  <GalleryItem
+                    key={item.title}
+                    index={i + 1}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                    imageWidth={1106}
+                    imageHeight={2266}
+                  />
                 ))}
               </div>
             </div>
-          ))}
+          </Reveal>
 
-          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                Dashboard walkthrough
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">How the public app presents the workflow</h2>
-            </div>
-
-            <div className="space-y-8">
-              {dashboardGallery.map((item) => (
-                <div key={item.title} className="grid gap-5 rounded-[1.5rem] border border-black/6 bg-zinc-50/70 p-5 md:grid-cols-[0.78fr_1.22fr] md:items-center">
-                  <div className="mx-auto w-full max-w-[250px] rounded-[1.5rem] border border-black/10 bg-zinc-950 p-3 shadow-[0_16px_40px_rgba(24,24,27,0.12)]">
-                    <div className="overflow-hidden rounded-[1.2rem] border border-white/10 bg-black">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={1106}
-                        height={2266}
-                        className="h-auto w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold tracking-tight text-zinc-950">{item.title}</h3>
-                    <p className="text-base leading-8 text-zinc-600">{item.description}</p>
-                  </div>
+          <Reveal>
+            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
+              <div className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-xs text-emerald-300">10</span>
+                  <span className="h-px w-8 bg-white/15" />
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+                    Live scoring config
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                Live scoring config
-              </p>
-              <h2 className="text-2xl font-semibold tracking-tight">Current keyword weights from the public repo</h2>
-              <p className="text-base leading-8 text-zinc-600">
-                This section reads directly from the public <code>config/scoring-config.json</code> file in the job-checker repository, so the portfolio stays aligned with the live scoring model.
-              </p>
-            </div>
-
-            <div className="grid gap-6 lg:grid-cols-2">
-              <div className="space-y-4 rounded-[1.25rem] border border-emerald-100 bg-emerald-50/60 p-5">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Positive keywords</p>
-                </div>
-                {renderKeywordEntries(positiveKeywords, "positive")}
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
+                  Current keyword weights from the public repo
+                </h2>
+                <p className="text-base leading-8 text-zinc-400">
+                  This section reads directly from the public{" "}
+                  <code className="rounded-md border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-sm text-emerald-300">
+                    config/scoring-config.json
+                  </code>{" "}
+                  file in the job-checker repository, so the portfolio stays aligned with the live
+                  scoring model.
+                </p>
               </div>
 
-              <div className="space-y-4 rounded-[1.25rem] border border-rose-100 bg-rose-50/60 p-5">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-rose-700">Negative keywords</p>
+              <div className="grid gap-5 lg:grid-cols-2">
+                <div className="space-y-4 rounded-[1.25rem] border border-emerald-400/20 bg-emerald-400/[0.06] p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-300">
+                    Positive keywords
+                  </p>
+                  {renderKeywordEntries(positiveKeywords, "positive")}
                 </div>
-                {renderKeywordEntries(negativeKeywords, "negative")}
+
+                <div className="space-y-4 rounded-[1.25rem] border border-rose-400/20 bg-rose-400/[0.06] p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-300">
+                    Negative keywords
+                  </p>
+                  {renderKeywordEntries(negativeKeywords, "negative")}
+                </div>
               </div>
             </div>
-          </div>
+          </Reveal>
+
+          <NextProject
+            name="Centful"
+            href="/projects/centful"
+            blurb="A personal finance app built to make spending review feel calmer, clearer, and more usable."
+          />
         </div>
 
-        <aside className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-7 text-white shadow-[0_20px_80px_rgba(24,24,27,0.18)]">
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-400">
-                Snapshot
-              </p>
-            </div>
-            <ul className="space-y-4 text-sm leading-7 text-zinc-300">
-              {highlights.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
-              <p>
-                <span className="font-semibold text-white">Type:</span> analytics-driven job search platform
-              </p>
-              <p>
-                <span className="font-semibold text-white">Core components:</span> LinkedIn search ingestion,
-                rule-based ranking, Python pipeline, public dataset export, Next.js dashboard, LLM-assisted drafting
-              </p>
-              <p>
-                <span className="font-semibold text-white">Focus:</span> job search prioritization,
-                automation, workflow efficiency
-              </p>
-              <p>
-                <span className="font-semibold text-white">Repository:</span> public on GitHub
-              </p>
-              <p>
-                <span className="font-semibold text-white">Status:</span> live public build
-              </p>
-            </div>
-          </div>
-        </aside>
+        <SnapshotAside highlights={highlights} meta={meta} />
       </section>
     </main>
   );
