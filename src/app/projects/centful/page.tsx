@@ -4,9 +4,9 @@ import Link from "next/link";
 import { CentfulHeroSlider } from "@/components/CentfulHeroSlider";
 
 const highlights = [
-  "Built as a personal finance app with direct bank connectivity, review workflows, and category management.",
+  "Built as a personal finance app with direct bank connectivity, review workflows, category management, and merchant-rule automation.",
   "Designed around a calmer mobile experience, with dark visual treatment, clear hierarchy, and focused day-to-day actions.",
-  "Pairs product thinking with implementation detail, from Plaid-linked accounts to transaction review and merchant-rule personalization.",
+  "Pairs product thinking with implementation detail, from Plaid-linked accounts to regex-based transaction rules and AI-assisted rule creation.",
 ];
 
 const principles = [
@@ -60,6 +60,18 @@ const gallery = [
     description:
       "Transaction browsing includes a mobile-friendly date-range sheet with quick filters like this month, last month, last 30 days, and this year.",
     image: "/images/centful/date-filter.png",
+  },
+  {
+    title: "Merchant rules",
+    description:
+      "Users can define regex-based merchant rules that automatically categorize matching transactions from the raw description, turning repeated cleanup work into reusable logic.",
+    image: "/images/centful/merchant-rules.png",
+  },
+  {
+    title: "AI-assisted regex creation",
+    description:
+      "Instead of expecting users to write regex by hand, the app can generate a suggested pattern from a plain-English description of what they want to match, then let them review and save it.",
+    image: "/images/centful/rule-create-generated.png",
   },
   {
     title: "Settings and personalization",
@@ -135,8 +147,8 @@ export default function CentfulProjectPage() {
               <p>
                 Centful is not just a static budgeting concept. The app includes linked account
                 management, Plaid-based syncing, a review queue for uncategorized spend, merchant
-                rule personalization, category editing, and transaction browsing with date-range
-                filtering.
+                rule personalization, regex-based auto-categorization, category editing, and
+                transaction browsing with date-range filtering.
               </p>
               <p>
                 That matters because the product story is grounded in real workflows, not just mock
@@ -232,7 +244,8 @@ export default function CentfulProjectPage() {
               </p>
               <p>
                 <span className="font-semibold text-white">Core components:</span> Plaid account linking,
-                transaction ingestion, review queue, merchant rules, category management
+                transaction ingestion, review queue, regex merchant rules, AI-assisted rule creation,
+                category management
               </p>
               <p>
                 <span className="font-semibold text-white">Focus:</span> personal finance,
