@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type ScoringConfig = {
@@ -13,6 +14,33 @@ const highlights = [
   "Analyzes LinkedIn job postings published within the previous 24 hours and ranks them with a configurable recommendation engine.",
   "Uses a scheduled Python pipeline to pull only newly published postings, refresh the public dataset, and reduce duplicate recommendations.",
   "Ships with a live Next.js dashboard and API-backed cover-letter generation flow, including downloadable PDF output.",
+];
+
+const dashboardGallery = [
+  {
+    title: "Dashboard hero",
+    description:
+      "The redesigned dashboard opens with a live pipeline snapshot that frames the dataset as a ranked feed instead of a static table dump.",
+    image: "/images/job-checker/hero-mobile.png",
+  },
+  {
+    title: "Filter controls",
+    description:
+      "Applicant profile selection, score thresholding, salary filtering, location filtering, and search all sit inside a richer control surface designed for faster scanning and tighter narrowing.",
+    image: "/images/job-checker/filters-mobile.png",
+  },
+  {
+    title: "Ranked job cards",
+    description:
+      "Each role is presented as a more legible recommendation object, with score visualization, matched terms, penalties, metadata chips, and direct cover-letter actions.",
+    image: "/images/job-checker/cards-mobile.png",
+  },
+  {
+    title: "Letter view",
+    description:
+      "Generated letters open in a dedicated view with immediate PDF download, which keeps the drafting flow focused and separate from the browsing interface.",
+    image: "/images/job-checker/letter-mobile.png",
+  },
 ];
 
 const sections = [
@@ -46,6 +74,14 @@ const sections = [
     body: [
       "The scoring model does not rely on just one field. It incorporates keyword logic from the job description, title-based rules, and location-based preferences. In the active configuration, location is explicitly part of the scoring logic, with positive weighting for places like Piscataway, New Brunswick, Princeton, Rahway, Iselin, and Edison, while also allowing remote roles.",
       "The system also uses thresholding to control quality, including a minimum score requirement and a minimum number of positive matches before a role is surfaced. That helps the dashboard stay focused on opportunities that are both recent and genuinely relevant.",
+    ],
+  },
+  {
+    label: "Interface design",
+    title: "How the dashboard evolved visually",
+    body: [
+      "Once the underlying pipeline and application flow were working reliably, I treated the dashboard itself as a product design problem rather than a basic admin interface. The result is a more cinematic, motion-rich frontend that frames the job feed as something active, filtered, and decision-oriented.",
+      "The redesign leans into visual hierarchy, animated feedback, richer card presentation, and a stronger sense of momentum, while leaving the underlying data logic and backend behavior intact.",
     ],
   },
   {
@@ -156,6 +192,45 @@ export default async function JobSearchAnalyticsProjectPage() {
               </a>
             </div>
           </div>
+
+          <div className="grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[2rem] border border-black/8 bg-zinc-950 p-4 shadow-[0_24px_80px_rgba(24,24,27,0.16)]">
+              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
+                <Image
+                  src="/images/job-checker/hero-mobile.png"
+                  alt="Job Checker dashboard hero showing weighted job matches and live pipeline stats."
+                  width={1106}
+                  height={2266}
+                  className="h-auto w-full"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)] sm:translate-y-8">
+                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
+                  <Image
+                    src="/images/job-checker/cards-mobile.png"
+                    alt="Job Checker ranked job cards with scores, tags, and cover letter actions."
+                    width={1106}
+                    height={2266}
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
+              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)]">
+                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
+                  <Image
+                    src="/images/job-checker/letter-mobile.png"
+                    alt="Job Checker cover letter view with PDF download action."
+                    width={1106}
+                    height={2266}
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -177,6 +252,37 @@ export default async function JobSearchAnalyticsProjectPage() {
               </div>
             </div>
           ))}
+
+          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                Dashboard walkthrough
+              </p>
+              <h2 className="text-2xl font-semibold tracking-tight">How the public app presents the workflow</h2>
+            </div>
+
+            <div className="space-y-8">
+              {dashboardGallery.map((item) => (
+                <div key={item.title} className="grid gap-5 rounded-[1.5rem] border border-black/6 bg-zinc-50/70 p-5 md:grid-cols-[0.78fr_1.22fr] md:items-center">
+                  <div className="mx-auto w-full max-w-[250px] rounded-[1.5rem] border border-black/10 bg-zinc-950 p-3 shadow-[0_16px_40px_rgba(24,24,27,0.12)]">
+                    <div className="overflow-hidden rounded-[1.2rem] border border-white/10 bg-black">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={1106}
+                        height={2266}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-semibold tracking-tight text-zinc-950">{item.title}</h3>
+                    <p className="text-base leading-8 text-zinc-600">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
             <div className="space-y-3">
