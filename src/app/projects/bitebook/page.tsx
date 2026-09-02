@@ -11,7 +11,7 @@ const highlights = [
 
 const heroSlides = [
   {
-    title: "Summary",
+    title: "Log In",
     image: "/images/bitebook/summary.png",
     alt: "Bitebook landing screen describing the product as a recipe space for people who actually cook.",
   },
@@ -215,7 +215,7 @@ export default function BitebookProjectPage() {
             </ul>
             <div className="space-y-3 border-t border-white/10 pt-6 text-sm text-zinc-300">
               <p>
-                <span className="font-semibold text-white">Type:</span> consumer recipe product
+                <span className="font-semibold text-white">Type:</span> iOS app
               </p>
               <p>
                 <span className="font-semibold text-white">Core components:</span> recipe discovery,
@@ -230,7 +230,7 @@ export default function BitebookProjectPage() {
                 product thinking, interface direction
               </p>
               <p>
-                <span className="font-semibold text-white">Status:</span> concept / exploration
+                <span className="font-semibold text-white">Status:</span> active build
               </p>
             </div>
           </div>
