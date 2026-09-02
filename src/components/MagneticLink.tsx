@@ -29,8 +29,8 @@ export function MagneticLink({
   const onMouseMove = (event: React.MouseEvent) => {
     if (reduce || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
-    x.set((event.clientX - rect.left - rect.width / 2) * 0.22);
-    y.set((event.clientY - rect.top - rect.height / 2) * 0.32);
+    x.set((event.clientX - rect.left - rect.width / 2) * 0.25);
+    y.set((event.clientY - rect.top - rect.height / 2) * 0.35);
   };
 
   const onMouseLeave = () => {
@@ -39,21 +39,21 @@ export function MagneticLink({
   };
 
   const base =
-    "group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 text-sm font-semibold transition-colors duration-300";
+    "group relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden px-8 py-3 font-mono text-xs font-bold uppercase tracking-[0.22em] transition-colors duration-300";
   const styles =
     variant === "primary"
-      ? "bg-white text-ink-950 hover:bg-emerald-200"
-      : "border border-white/15 bg-white/[0.03] text-zinc-100 backdrop-blur hover:border-white/40";
+      ? "bg-volt text-void hover:bg-bone"
+      : "border border-white/20 bg-transparent text-bone hover:border-volt hover:text-volt";
 
   const inner = (
     <>
       {variant === "primary" && (
         <span
           aria-hidden
-          className="absolute inset-0 -translate-x-[120%] skew-x-12 bg-gradient-to-r from-transparent via-emerald-100/70 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[120%]"
+          className="absolute inset-0 -translate-x-[120%] skew-x-12 bg-gradient-to-r from-transparent via-white/60 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[120%]"
         />
       )}
-      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+      <span className="relative z-10 inline-flex items-center gap-3">{children}</span>
     </>
   );
 

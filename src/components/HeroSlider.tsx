@@ -42,13 +42,13 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
 
   return (
     <div
-      className="space-y-5"
+      className="space-y-6"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Tabs */}
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="inline-flex flex-wrap gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1">
+      {/* progress + tabs */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-2">
           {slides.map((slide, index) => {
             const isActive = index === activeIndex;
             return (
@@ -57,28 +57,29 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
                 type="button"
                 onClick={() => goTo(index)}
                 aria-pressed={isActive}
-                aria-label={`Show ${slide.title}`}
-                className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-                  isActive ? "text-ink-950" : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${
+                  isActive ? "bg-volt font-bold text-void" : "border border-white/10 text-fog hover:text-bone"
                 }`}
               >
-                {isActive && (
-                  <motion.span
-                    layoutId="hero-slider-pill"
-                    className="absolute inset-0 rounded-full bg-white"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
-                )}
-                <span className="relative z-10">{slide.title}</span>
+                <span>{slide.title}</span>
+                <span className="ml-2 opacity-60">/{String(index + 1).padStart(2, "0")}</span>
               </button>
             );
           })}
         </div>
-        <span className="font-mono text-xs tracking-[0.2em] text-zinc-500">
-          {String(activeIndex + 1).padStart(2, "0")}
-          <span className="mx-1 text-zinc-700">/</span>
-          {String(slides.length).padStart(2, "0")}
-        </span>
+        <div className="flex items-center gap-3 font-mono text-xs text-fog">
+          <span>PROGRESS</span>
+          <div className="h-1 w-28 bg-white/10">
+            <div
+              key={activeIndex}
+              className="h-full bg-volt"
+              style={{
+                animation: `slider-progress ${AUTOPLAY_MS}ms linear forwards`,
+                animationPlayState: paused || reduce ? "paused" : "running",
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Stage */}
@@ -90,89 +91,75 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
           if (info.offset.x < -70) goTo(activeIndex + 1);
           else if (info.offset.x > 70) goTo(activeIndex - 1);
         }}
-        className="group relative cursor-grab overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] active:cursor-grabbing"
+        className="group relative cursor-grab border border-white/10 bg-panel active:cursor-grabbing"
       >
-        {/* ambient glow */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-emerald-400/15 blur-[110px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-violet-500/15 blur-[110px]"
-        />
-
-        {/* progress bar */}
-        <div className="absolute inset-x-0 top-0 z-20 h-[3px] bg-white/5">
-          <div
-            key={activeIndex}
-            className="h-full bg-gradient-to-r from-emerald-300 via-cyan-300 to-violet-400"
-            style={{
-              animation: `slider-progress ${AUTOPLAY_MS}ms linear forwards`,
-              animationPlayState: paused || reduce ? "paused" : "running",
-            }}
-          />
-        </div>
+        {/* corner markers */}
+        <span className="absolute left-2 top-2 z-20 font-mono text-[9px] uppercase tracking-widest text-fog">
+          VIEWPORT // {String(activeIndex + 1).padStart(2, "0")}
+        </span>
+        <span className="absolute right-2 top-2 z-20 font-mono text-[9px] uppercase tracking-widest text-volt">
+          LIVE CAPTURE
+        </span>
 
         {/* arrows */}
         <button
           type="button"
-          aria-label="Previous screen"
+          aria-label="Previous slide"
           onClick={() => goTo(activeIndex - 1)}
-          className="absolute left-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-ink-950/60 text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 hover:border-white/30 hover:text-white focus-visible:opacity-100 group-hover:opacity-100"
+          className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-void font-mono text-sm text-bone transition hover:border-volt hover:text-volt"
         >
           ←
         </button>
         <button
           type="button"
-          aria-label="Next screen"
+          aria-label="Next slide"
           onClick={() => goTo(activeIndex + 1)}
-          className="absolute right-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-ink-950/60 text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 hover:border-white/30 hover:text-white focus-visible:opacity-100 group-hover:opacity-100"
+          className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-void font-mono text-sm text-bone transition hover:border-volt hover:text-volt"
         >
           →
         </button>
 
         {/* slide */}
-        <div className="relative z-10 flex items-center justify-center px-6 py-10 sm:py-12">
+        <div className="flex items-center justify-center px-6 py-12 sm:py-16">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, y: 36, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.98 }}
-              transition={{ duration: 0.55, ease: EASE }}
-              className="rounded-[2.1rem] border border-white/15 bg-ink-950 p-2.5 shadow-[0_32px_90px_rgba(0,0,0,0.65)]"
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.5, ease: EASE }}
+              className="border border-white/15 bg-void p-3 shadow-[0_32px_90px_rgba(0,0,0,0.75)]"
             >
-              <div className="overflow-hidden rounded-[1.7rem]">
-                <Image
-                  src={activeSlide.image}
-                  alt={activeSlide.alt}
-                  width={imageWidth}
-                  height={imageHeight}
-                  priority={activeIndex === 0}
-                  draggable={false}
-                  className="h-[380px] w-auto select-none sm:h-[470px] lg:h-[540px]"
-                />
-              </div>
+              <Image
+                src={activeSlide.image}
+                alt={activeSlide.alt}
+                width={imageWidth}
+                height={imageHeight}
+                priority={activeIndex === 0}
+                draggable={false}
+                className="h-[400px] w-auto select-none sm:h-[480px] lg:h-[560px]"
+              />
             </motion.div>
           </AnimatePresence>
         </div>
       </motion.div>
 
       {/* caption */}
-      <div className="min-h-[76px]">
+      <div className="min-h-[64px] border-t border-white/10 pt-4">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activeIndex}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4, ease: EASE }}
-            className="space-y-2"
+            transition={{ duration: 0.35, ease: EASE }}
+            className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between"
           >
-            <p className="font-serif text-2xl italic text-zinc-100">{activeSlide.title}</p>
+            <p className="font-display text-2xl font-bold uppercase tracking-tight text-bone">
+              {activeSlide.title}
+            </p>
             {activeSlide.description ? (
-              <p className="max-w-2xl text-sm leading-7 text-zinc-400">{activeSlide.description}</p>
+              <p className="max-w-xl text-sm leading-7 text-fog">{activeSlide.description}</p>
             ) : null}
           </motion.div>
         </AnimatePresence>

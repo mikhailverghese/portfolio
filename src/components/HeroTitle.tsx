@@ -2,35 +2,45 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
-type Word = {
+export type TitleWord = {
   t: string;
   accent?: boolean;
+  outline?: boolean;
 };
 
 type HeroTitleProps = {
-  lines: Word[][];
+  lines: TitleWord[][];
   className?: string;
+  delay?: number;
+  as?: "h1" | "h2";
 };
 
-export function HeroTitle({ lines, className = "" }: HeroTitleProps) {
+export function HeroTitle({ lines, className = "", delay = 0.2, as = "h1" }: HeroTitleProps) {
   const reduce = useReducedMotion();
+  const Tag = as === "h1" ? motion.h1 : motion.h2;
   let wordIndex = 0;
 
   return (
-    <h1 className={className}>
+    <Tag className={className}>
       {lines.map((line, lineIndex) => (
         <span key={lineIndex} className="block">
           {line.map((word) => {
-            const delay = 0.35 + wordIndex++ * 0.07;
+            const wordDelay = delay + wordIndex++ * 0.08;
+            const style = word.accent
+              ? "font-serif italic font-normal normal-case text-volt pr-[0.06em]"
+              : word.outline
+                ? "text-outline"
+                : "";
             return (
-              <span key={`${word.t}-${delay}`} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+              <span
+                key={`${word.t}-${wordDelay}`}
+                className="inline-block overflow-hidden pb-[0.09em] align-bottom"
+              >
                 <motion.span
-                  className={`inline-block will-change-transform ${
-                    word.accent ? "font-serif italic text-gradient pr-[0.06em]" : ""
-                  }`}
+                  className={`inline-block will-change-transform ${style}`}
                   initial={reduce ? false : { y: "115%", rotate: 4 }}
                   animate={{ y: "0%", rotate: 0 }}
-                  transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.9, delay: wordDelay, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {word.t}
                 </motion.span>
@@ -42,6 +52,6 @@ export function HeroTitle({ lines, className = "" }: HeroTitleProps) {
           })}
         </span>
       ))}
-    </h1>
+    </Tag>
   );
 }

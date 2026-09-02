@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function BackLink() {
@@ -9,10 +9,10 @@ export function BackLink() {
     <Reveal y={12}>
       <Link
         href="/"
-        className="group inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-400 backdrop-blur transition duration-300 hover:border-white/30 hover:text-white"
+        className="group inline-flex w-fit items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.25em] text-fog transition hover:text-volt"
       >
-        <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
-        Back to portfolio
+        <span className="transition-transform duration-300 group-hover:-translate-x-1.5">←</span>
+        Index of work
       </Link>
     </Reveal>
   );
@@ -28,22 +28,17 @@ type SectionCardProps = {
 export function SectionCard({ index, label, title, children }: SectionCardProps) {
   return (
     <Reveal>
-      <section className="group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 transition-colors duration-500 hover:border-white/15 sm:p-9">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-400/0 blur-[80px] transition-colors duration-700 group-hover:bg-emerald-400/10"
-        />
-        <div className="mb-5 flex items-center gap-4">
-          <span className="font-mono text-xs text-emerald-300">
-            {String(index).padStart(2, "0")}
-          </span>
-          <span className="h-px w-8 bg-white/15" />
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">{label}</p>
+      <section className="group border-t border-white/10 pt-8 sm:pt-10">
+        <div className="mb-6 flex items-center justify-between font-mono text-xs uppercase tracking-[0.25em]">
+          <span className="text-volt">/{String(index).padStart(2, "0")}</span>
+          <span className="text-fog">{label}</span>
         </div>
-        <h2 className="mb-5 text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
+        <h2 className="mb-6 font-display text-2xl font-bold uppercase tracking-tight text-bone sm:text-3xl lg:text-4xl">
           {title}
         </h2>
-        <div className="space-y-4 text-base leading-8 text-zinc-400">{children}</div>
+        <div className="space-y-5 text-base leading-8 text-fog sm:text-lg sm:leading-9">
+          {children}
+        </div>
       </section>
     </Reveal>
   );
@@ -58,31 +53,39 @@ type GalleryItemProps = {
   imageHeight: number;
 };
 
-export function GalleryItem({ index, title, description, image, imageWidth, imageHeight }: GalleryItemProps) {
+export function GalleryItem({
+  index,
+  title,
+  description,
+  image,
+  imageWidth,
+  imageHeight,
+}: GalleryItemProps) {
   return (
     <Reveal>
-      <div className="group grid gap-6 rounded-[1.5rem] border border-white/8 bg-ink-900/60 p-5 transition-colors duration-500 hover:border-white/15 md:grid-cols-[0.8fr_1.2fr] md:items-center md:p-6">
-        <div className="relative mx-auto w-full max-w-[250px]">
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-0 scale-90 rounded-full bg-cyan-400/10 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-          />
-          <div className="relative rounded-[1.9rem] border border-white/12 bg-ink-950 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.55)] transition-transform duration-700 ease-out group-hover:-translate-y-1.5 group-hover:rotate-[0.5deg]">
-            <div className="overflow-hidden rounded-[1.5rem]">
-              <Image
-                src={image}
-                alt={title}
-                width={imageWidth}
-                height={imageHeight}
-                className="h-auto w-full"
-              />
-            </div>
+      <div className="group border-t border-white/10 pt-8 sm:pt-10">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="relative border border-white/10 bg-panel p-3">
+            <ParallaxImage
+              src={image}
+              alt={title}
+              width={imageWidth}
+              height={imageHeight}
+              className="w-full"
+            />
+            <span className="absolute bottom-4 left-4 bg-void/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-volt backdrop-blur">
+              Fig. {String(index).padStart(2, "0")}
+            </span>
           </div>
-        </div>
-        <div className="space-y-3">
-          <p className="font-mono text-xs text-zinc-600">{String(index).padStart(2, "0")}</p>
-          <h3 className="text-xl font-semibold tracking-tight text-zinc-50">{title}</h3>
-          <p className="text-sm leading-7 text-zinc-400 sm:text-base sm:leading-8">{description}</p>
+          <div className="space-y-4">
+            <p className="font-mono text-xs uppercase tracking-[0.25em] text-volt">
+              Screen {String(index).padStart(2, "0")}
+            </p>
+            <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-bone sm:text-3xl">
+              {title}
+            </h3>
+            <p className="text-base leading-8 text-fog sm:leading-8">{description}</p>
+          </div>
         </div>
       </div>
     </Reveal>
@@ -96,30 +99,28 @@ type SnapshotAsideProps = {
 
 export function SnapshotAside({ highlights, meta }: SnapshotAsideProps) {
   return (
-    <Reveal delay={0.15} className="lg:sticky lg:top-28">
-      <aside className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-ink-800 to-ink-900 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-emerald-400/10 blur-[90px]"
-        />
-        <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
-          Snapshot
+    <Reveal delay={0.15} className="lg:sticky lg:top-24">
+      <aside className="border-t-2 border-volt bg-panel p-6 sm:p-8">
+        <p className="mb-6 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-volt">
+          System Dossier
         </p>
-        <ul className="space-y-4 text-sm leading-7 text-zinc-300">
-          {highlights.map((item) => (
+        <ul className="space-y-4 text-sm leading-7 text-bone/90">
+          {highlights.map((item, i) => (
             <li key={item} className="flex gap-3">
-              <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300 shadow-[0_0_12px_rgb(110_231_183/0.8)]" />
+              <span className="font-mono text-xs text-volt">[{i + 1}]</span>
               <span>{item}</span>
             </li>
           ))}
         </ul>
-        <dl className="mt-7 space-y-4 border-t border-white/10 pt-6">
+        <dl className="mt-8 space-y-4 border-t border-white/10 pt-6">
           {meta.map((row) => (
             <div key={row.label}>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+              <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-fog">
                 {row.label}
               </dt>
-              <dd className="mt-1 text-sm leading-6 text-zinc-200">{row.value}</dd>
+              <dd className="mt-1 font-mono text-xs uppercase tracking-wider text-bone">
+                {row.value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -139,23 +140,24 @@ export function NextProject({ name, href, blurb }: NextProjectProps) {
     <Reveal>
       <Link
         href={href}
-        className="group relative block overflow-hidden rounded-[2rem] border border-white/8 bg-white/[0.02] p-8 transition-colors duration-500 hover:border-white/20 sm:p-12"
+        data-cursor-label="NEXT"
+        className="group relative block overflow-hidden border-t-2 border-volt bg-panel p-8 sm:p-14"
       >
-        <div
+        <span
           aria-hidden
-          className="pointer-events-none absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-violet-500/10 blur-[100px] opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+          className="absolute inset-0 origin-bottom scale-y-0 bg-volt transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100"
         />
-        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
-              Next project
+        <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="space-y-3 transition-colors duration-300 group-hover:text-void">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-fog group-hover:text-void/70">
+              Next system / 02
             </p>
-            <p className="font-serif text-4xl italic text-zinc-100 transition-colors group-hover:text-white sm:text-5xl">
+            <p className="font-display text-4xl font-extrabold uppercase tracking-tight text-bone group-hover:text-void sm:text-6xl">
               {name}
             </p>
-            <p className="max-w-md text-sm leading-7 text-zinc-400">{blurb}</p>
+            <p className="max-w-md text-sm leading-7 text-fog group-hover:text-void/80">{blurb}</p>
           </div>
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/15 text-xl text-zinc-300 transition-all duration-500 group-hover:rotate-45 group-hover:border-emerald-300/60 group-hover:text-emerald-300">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center border border-white/20 font-mono text-xl text-bone transition-all duration-500 group-hover:rotate-45 group-hover:border-void group-hover:text-void">
             ↗
           </span>
         </div>

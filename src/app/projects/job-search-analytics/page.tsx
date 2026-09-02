@@ -13,9 +13,9 @@ import {
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Intelligent Job Search Analytics Platform — Mikhail Verghese",
+  title: "Job Search Analytics Platform — Mikhail Verghese",
   description:
-    "An automated job search system for finding, ranking, and acting on the right opportunities faster.",
+    "An automated job discovery, recommendation engine, and application drafting platform.",
 };
 
 type ScoringConfig = {
@@ -25,44 +25,45 @@ type ScoringConfig = {
   };
 };
 
-const SCORING_CONFIG_URL = "https://raw.githubusercontent.com/mikhailverghese/job-checker/main/config/scoring-config.json";
+const SCORING_CONFIG_URL =
+  "https://raw.githubusercontent.com/mikhailverghese/job-checker/main/config/scoring-config.json";
 
 const highlights = [
-  "Scores newly posted LinkedIn roles with a configurable rule-based recommendation engine.",
-  "Uses a scheduled Python pipeline to refresh a public-safe dataset and reduce duplicate recommendations.",
-  "Ships with a live Next.js dashboard and API-backed cover-letter generation with direct PDF download.",
+  "Daily scheduled Python pipeline ingesting fresh LinkedIn postings across 4 target data engineering titles.",
+  "Weighted multi-factor scoring engine evaluating description signals, title seniority, and regional geographic targets.",
+  "Live Next.js dashboard with interactive thresholds, profile switching, and LLM-assisted cover letter synthesis with PDF export.",
 ];
 
 const meta = [
-  { label: "Type", value: "Analytics-driven job search platform" },
-  {
-    label: "Core components",
-    value:
-      "LinkedIn search ingestion, rule-based ranking, Python pipeline, public dataset export, Next.js dashboard, LLM-assisted drafting",
-  },
-  { label: "Focus", value: "Job search prioritization, automation, workflow efficiency" },
+  { label: "Platform", value: "Web Application & Scheduled Pipeline" },
+  { label: "Stack", value: "Next.js · React · Python · LinkedIn Ingestion · OpenAI API · Tailwind" },
+  { label: "Domain", value: "Automated Job Intelligence & Workflow Optimization" },
   { label: "Repository", value: "Public on GitHub" },
-  { label: "Status", value: "Live public build" },
+  { label: "Status", value: "Live Production System" },
 ];
 
 const heroSlides: HeroSlide[] = [
   {
-    title: "Summary",
+    title: "Intelligence Feed",
+    description: "Real-time scored opportunity stream filtered to recent 24-hour ingestion cycles.",
     image: "/images/job-checker/hero-mobile.png",
     alt: "Job Checker dashboard hero showing weighted job matches and live pipeline stats.",
   },
   {
-    title: "Filters",
+    title: "Control Surface",
+    description: "Fine-grained sliders for score thresholds, salary floors, applicant profiles, and locations.",
     image: "/images/job-checker/filters-mobile.png",
     alt: "Job Checker filter controls for applicant, score, salary, location, and search.",
   },
   {
-    title: "Jobs",
+    title: "Evaluation Cards",
+    description: "Dense recommendation objects showing positive/negative keyword matches and direct application actions.",
     image: "/images/job-checker/cards-mobile.png",
     alt: "Job Checker ranked job cards with scores, tags, and cover letter actions.",
   },
   {
-    title: "Letter View",
+    title: "Drafting Studio",
+    description: "LLM-synthesized cover letter viewer with on-the-fly PDF formatting and immediate download.",
     image: "/images/job-checker/letter-mobile.png",
     alt: "Job Checker cover letter view with PDF download action.",
   },
@@ -70,88 +71,55 @@ const heroSlides: HeroSlide[] = [
 
 const dashboardGallery = [
   {
-    title: "Filter controls",
+    title: "Parameter Filter Surface",
     description:
-      "Applicant profile selection, score thresholding, salary filtering, location filtering, and search all sit inside a richer control surface designed for faster scanning and tighter narrowing.",
+      "Interactive controls allow instant narrowing by applicant profile, minimum relevance score, target salary range, and specific New Jersey / New York commuter zones.",
     image: "/images/job-checker/filters-mobile.png",
   },
   {
-    title: "Ranked job cards",
+    title: "Opportunity Score Cards",
     description:
-      "Each role is presented as a more legible recommendation object, with score visualization, matched terms, penalties, metadata chips, and direct cover-letter actions.",
+      "Each card renders an analytical breakdown: computed score index, matched technical keywords (+ points), disqualifiers (- points), and quick-action links.",
     image: "/images/job-checker/cards-mobile.png",
   },
   {
-    title: "Letter view",
+    title: "On-Demand Letter Generation",
     description:
-      "Generated letters open in a dedicated view with immediate PDF download, which keeps the drafting flow focused and separate from the browsing interface.",
+      "Combines structured candidate experience records with the selected job's raw text to produce tailored cover letter PDFs in one click.",
     image: "/images/job-checker/letter-mobile.png",
   },
 ];
 
 const sections = [
   {
-    label: "Overview",
-    title: "What the platform does",
+    label: "Genesis",
+    title: "Turning Search Chaos into Data Pipelines",
     body: [
-      "The Intelligent Job Search Analytics Platform is an automated system for identifying, prioritizing, and acting on relevant LinkedIn job postings. Instead of treating a job search like manual browsing, it turns the process into something structured, repeatable, and analytically driven.",
-      "At its core, the platform evaluates newly published roles against configurable rules and surfaces the strongest opportunities in a live web dashboard built for action rather than noise.",
+      "Job searching via traditional portals is an inefficient manual loop: wading through duplicate listings, sponsored junk, and mislabeled seniority levels. The signal-to-noise ratio is notoriously poor.",
+      "This platform transforms the process from passive browsing into an automated, data-driven pipeline: scraping, scoring, thresholding, and accelerating high-relevance applications.",
     ],
   },
   {
-    label: "Search workflow",
-    title: "How the search process begins",
+    label: "Ingestion Loop",
+    title: "Scheduled Data Harvesting",
     body: [
-      "The workflow begins with a defined set of target search titles. The current configuration uses four: Analytics Engineer, BI Engineer, BI Analyst, and Data Analyst.",
-      "For each of those titles, the system reviews up to 50 LinkedIn results and limits the dataset to roles published within the previous 24 hours. That keeps the search targeted, current, and grounded in a repeatable intake process.",
+      "A Python ingestion pipeline executes daily on a scheduled cadence. It queries LinkedIn for target data roles (Analytics Engineer, BI Engineer, BI Analyst, Data Analyst) strictly published within the preceding 24 hours.",
+      "The harvester deduplicates results against historical runs and commits a sanitized, public-safe JSON payload directly consumed by the dashboard.",
     ],
   },
   {
-    label: "Recommendation engine",
-    title: "How job opportunities are ranked",
+    label: "Recommendation Model",
+    title: "Weighted Scoring Architecture",
     body: [
-      "The ranking logic is driven by a configurable rule-based recommendation engine. Jobs are evaluated across title signals, description keywords, location preferences, and score thresholds.",
-      "The positive and negative keyword sets shown below are pulled directly from the public scoring config in the job-checker repository, so the portfolio stays in sync with the real scoring model instead of relying on hardcoded examples.",
+      "Jobs are ranked via a deterministic scoring engine that computes positive and negative signals across multiple dimensions: keyword relevance, seniority matching, and geographic preference.",
+      "Target regions like Central New Jersey (Piscataway, New Brunswick, Princeton, Edison) receive positive boosts alongside remote roles, while irrelevant tech stacks incur explicit penalties.",
     ],
   },
   {
-    label: "Scoring criteria",
-    title: "What the engine looks at",
+    label: "Drafting Pipeline",
+    title: "Applied AI Cover Letter Synthesis",
     body: [
-      "The scoring model does not rely on a single field. It incorporates keyword logic from the job description, title-based rules, and location-based preferences. In the active configuration, location is explicitly part of the scoring logic, with positive weighting for places like Piscataway, New Brunswick, Princeton, Rahway, Iselin, and Edison, while still allowing remote roles.",
-      "The system also uses thresholding to control quality, including a minimum score requirement and a minimum number of positive matches before a role is surfaced. That helps the dashboard stay focused on opportunities that are both recent and genuinely relevant.",
-    ],
-  },
-  {
-    label: "Interface design",
-    title: "How the dashboard evolved visually",
-    body: [
-      "Once the underlying pipeline and application flow were working reliably, I treated the dashboard itself as a product design problem rather than a basic admin interface. The result is a more cinematic, motion-rich frontend that frames the job feed as something active, filtered, and decision-oriented.",
-      "The redesign leans on stronger hierarchy, animated feedback, richer card presentation, and a clearer sense of momentum, while leaving the underlying data logic and backend behavior intact.",
-    ],
-  },
-  {
-    label: "Pipeline design",
-    title: "How the dashboard stays current",
-    body: [
-      "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. It exports a public-safe dataset that the dashboard reads directly, which keeps the live site focused on fresh opportunities while reducing repeat surfacing of stale listings.",
-      "By narrowing the retrieval window, storing seen jobs, and refreshing the published dataset on a repeatable cadence, the system maintains a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
-    ],
-  },
-  {
-    label: "Application workflow",
-    title: "How it supports tailored applications",
-    body: [
-      "Beyond ranking and surfacing jobs, the platform also includes an application support workflow built into the public app. It combines structured candidate profile data with selected job descriptions, then uses an LLM API to generate tailored cover letters on demand.",
-      "The goal is not generic automation for its own sake. It is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, then let the user review or download them immediately from the dashboard flow.",
-    ],
-  },
-  {
-    label: "Why it matters",
-    title: "What this project shows",
-    body: [
-      "This project sits at a useful intersection of analytics, workflow design, and applied automation. It shows how structured logic, data pipelines, and orchestration can improve a messy real-world process.",
-      "It also reflects the kind of systems I like building: practical tools that reduce noise, clarify priorities, and help people move from raw information to better decisions.",
+      "Rather than generic ChatGPT prompts, the platform orchestrates a structured generation pipeline: injecting candidate profile metadata and the targeted job specification into an LLM API to produce role-specific draft letters with clean PDF formatting.",
     ],
   },
 ];
@@ -161,7 +129,6 @@ async function getScoringConfig(): Promise<ScoringConfig | null> {
     const response = await fetch(SCORING_CONFIG_URL, {
       next: { revalidate: 3600 },
     });
-
     if (!response.ok) return null;
     return (await response.json()) as ScoringConfig;
   } catch {
@@ -169,9 +136,12 @@ async function getScoringConfig(): Promise<ScoringConfig | null> {
   }
 }
 
-function renderKeywordEntries(entries: Record<string, number> | undefined, tone: "positive" | "negative") {
+function renderKeywordEntries(
+  entries: Record<string, number> | undefined,
+  tone: "positive" | "negative",
+) {
   if (!entries || !Object.keys(entries).length) {
-    return <p className="text-sm leading-7 text-zinc-500">No keywords available.</p>;
+    return <p className="font-mono text-xs text-fog">No keywords retrieved.</p>;
   }
 
   return (
@@ -179,12 +149,13 @@ function renderKeywordEntries(entries: Record<string, number> | undefined, tone:
       {Object.entries(entries).map(([term, score]) => (
         <span
           key={`${tone}-${term}`}
-          className={`rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] transition-colors duration-300 ${tone === "positive"
-            ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-300 hover:border-emerald-300/50"
-            : "border-rose-400/25 bg-rose-400/10 text-rose-300 hover:border-rose-300/50"
-            }`}
+          className={`px-3 py-1 font-mono text-[11px] uppercase tracking-wider ${
+            tone === "positive"
+              ? "bg-volt/10 text-volt border border-volt/30"
+              : "bg-rose-500/10 text-rose-300 border border-rose-500/30"
+          }`}
         >
-          {term} ({score > 0 ? `+${score}` : score})
+          {term} <span className="opacity-75">[{score > 0 ? `+${score}` : score}]</span>
         </span>
       ))}
     </div>
@@ -197,139 +168,134 @@ export default async function JobSearchAnalyticsProjectPage() {
   const negativeKeywords = scoringConfig?.weights?.negative;
 
   return (
-    <main className="min-h-screen bg-ink-950 text-zinc-100">
+    <main className="min-h-screen bg-void text-bone">
       <ScrollProgress />
 
-      {/* ---------- hero ---------- */}
-      <section className="noise-overlay relative overflow-hidden border-b border-white/5">
+      {/* ---------- HERO ---------- */}
+      <section className="relative overflow-hidden border-b border-white/10 pt-28 sm:pt-36">
         <div aria-hidden className="grid-lines absolute inset-0" />
         <div
           aria-hidden
-          className="animate-aurora-a pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-cyan-500/12 blur-[130px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute bottom-[-30%] left-[-10%] h-[420px] w-[420px] rounded-full bg-violet-500/12 blur-[120px]"
+          className="pointer-events-none absolute right-[-10%] top-0 h-[500px] w-[500px] rounded-full bg-volt/10 blur-[130px]"
         />
 
-        <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 pb-20 pt-32 sm:px-10 lg:px-12">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-20 sm:px-10 lg:px-12">
           <BackLink />
 
           <div className="space-y-6">
             <Reveal y={16}>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
-                Intelligent Job Search Analytics Platform
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-volt">
+                Case Study // 02
               </p>
             </Reveal>
+
             <Reveal delay={0.1}>
-              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-zinc-50 sm:text-6xl">
-                An automated job search system for finding, ranking, and acting on the{" "}
-                <span className="font-serif italic text-gradient">right opportunities</span> faster.
+              <h1 className="max-w-5xl font-display text-[clamp(2.5rem,7vw,5.8rem)] font-extrabold uppercase leading-[0.94] tracking-tight text-bone">
+                Job Search <br />
+                <span className="font-serif italic font-normal normal-case text-volt">
+                  Analytics Platform
+                </span>
               </h1>
             </Reveal>
+
             <Reveal delay={0.2}>
-              <p className="max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl sm:leading-9">
-                This project brings together analytics, automation, and workflow design to create a
-                more targeted and efficient job search process, from opportunity discovery through
-                application support.
+              <p className="max-w-3xl font-sans text-lg leading-8 text-fog sm:text-2xl sm:leading-10">
+                An automated intelligence engine combining LinkedIn scraping, multi-factor keyword
+                scoring, scheduled Python data pipelines, and LLM-assisted application drafting.
               </p>
             </Reveal>
+
             <Reveal delay={0.3}>
               <div className="flex flex-wrap gap-4 pt-2">
                 <MagneticLink href="https://job-checker-seven.vercel.app" external>
-                  View Dashboard
+                  Live Platform
                   <span aria-hidden>↗</span>
                 </MagneticLink>
-                <MagneticLink href="https://github.com/mikhailverghese/job-checker" external variant="ghost">
-                  View GitHub
+                <MagneticLink
+                  href="https://github.com/mikhailverghese/job-checker"
+                  external
+                  variant="ghost"
+                >
+                  GitHub Source
                   <span aria-hidden>↗</span>
                 </MagneticLink>
               </div>
             </Reveal>
           </div>
 
-          <Reveal delay={0.35} y={40}>
+          <Reveal delay={0.35} y={32}>
             <HeroSlider slides={heroSlides} imageWidth={1106} imageHeight={2266} />
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- body ---------- */}
-      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
-        <div className="space-y-8">
+      {/* ---------- DOSSIER & CONTENT ---------- */}
+      <section className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-12">
+        <div className="space-y-12">
           {sections.map((section, i) => (
-            <SectionCard key={section.title} index={i + 1} label={section.label} title={section.title}>
+            <SectionCard
+              key={section.title}
+              index={i + 1}
+              label={section.label}
+              title={section.title}
+            >
               {section.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </SectionCard>
           ))}
 
-          <Reveal>
-            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
-              <div className="space-y-3">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-xs text-emerald-300">09</span>
-                  <span className="h-px w-8 bg-white/15" />
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
-                    Dashboard walkthrough
-                  </p>
-                </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
-                  How the public app presents the workflow
-                </h2>
-              </div>
-
-              <div className="space-y-6">
-                {dashboardGallery.map((item, i) => (
-                  <GalleryItem
-                    key={item.title}
-                    index={i + 1}
-                    title={item.title}
-                    description={item.description}
-                    image={item.image}
-                    imageWidth={1106}
-                    imageHeight={2266}
-                  />
-                ))}
-              </div>
+          {/* walkthrough */}
+          <div className="space-y-8 border-t border-white/10 pt-10">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-volt">
+                /05 Detailed Walkthrough
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-extrabold uppercase tracking-tight text-bone sm:text-4xl">
+                Dashboard Interface Breakdown
+              </h2>
             </div>
-          </Reveal>
+            <div className="space-y-6">
+              {dashboardGallery.map((item, i) => (
+                <GalleryItem
+                  key={item.title}
+                  index={i + 1}
+                  title={item.title}
+                  description={item.description}
+                  image={item.image}
+                  imageWidth={1106}
+                  imageHeight={2266}
+                />
+              ))}
+            </div>
+          </div>
 
+          {/* live scoring config */}
           <Reveal>
-            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
-              <div className="space-y-3">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-xs text-emerald-300">10</span>
-                  <span className="h-px w-8 bg-white/15" />
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
-                    Live scoring config
-                  </p>
-                </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
-                  Current keyword weights from the public repo
-                </h2>
-                <p className="text-base leading-8 text-zinc-400">
-                  This section reads directly from the public{" "}
-                  <code className="rounded-md border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-sm text-emerald-300">
-                    config/scoring-config.json
-                  </code>{" "}
-                  file in the job-checker repository, so the portfolio stays aligned with the live
-                  scoring model.
-                </p>
+            <div className="border-t border-white/10 pt-10">
+              <div className="mb-6 flex items-center justify-between font-mono text-xs uppercase tracking-[0.25em]">
+                <span className="text-volt">/06</span>
+                <span className="text-fog">Live Ingestion Model</span>
               </div>
+              <h2 className="mb-4 font-display text-3xl font-extrabold uppercase tracking-tight text-bone">
+                Live Scoring Config
+              </h2>
+              <p className="mb-8 font-mono text-xs uppercase leading-6 tracking-wider text-fog">
+                Dynamically fetched from{" "}
+                <code className="bg-ink px-2 py-0.5 text-volt">config/scoring-config.json</code>{" "}
+                in the public repository.
+              </p>
 
-              <div className="grid gap-5 lg:grid-cols-2">
-                <div className="space-y-4 rounded-[1.25rem] border border-emerald-400/20 bg-emerald-400/[0.06] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-300">
-                    Positive keywords
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="border border-volt/30 bg-panel p-6">
+                  <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.25em] text-volt">
+                    Positive Signals
                   </p>
                   {renderKeywordEntries(positiveKeywords, "positive")}
                 </div>
-
-                <div className="space-y-4 rounded-[1.25rem] border border-rose-400/20 bg-rose-400/[0.06] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-300">
-                    Negative keywords
+                <div className="border border-rose-500/30 bg-panel p-6">
+                  <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.25em] text-rose-300">
+                    Negative Penalties
                   </p>
                   {renderKeywordEntries(negativeKeywords, "negative")}
                 </div>
@@ -338,9 +304,9 @@ export default async function JobSearchAnalyticsProjectPage() {
           </Reveal>
 
           <NextProject
-            name="Centful"
-            href="/projects/centful"
-            blurb="A personal finance app built to make spending review feel calmer, clearer, and more usable."
+            name="Bitebook"
+            href="/projects/bitebook"
+            blurb="A recipe product architecture built around culinary discovery, macro calculation, and habit formation."
           />
         </div>
 

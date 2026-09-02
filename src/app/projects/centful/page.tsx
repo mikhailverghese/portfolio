@@ -14,61 +14,57 @@ import { Reveal } from "@/components/motion/Reveal";
 export const metadata: Metadata = {
   title: "Centful — Mikhail Verghese",
   description:
-    "A personal finance app built to make spending review feel calmer, clearer, and more usable.",
+    "An iOS personal finance architecture built for calm spending review, automated rule engine, and Plaid sync.",
 };
 
 const highlights = [
-  "Built as a personal finance app with direct bank connectivity, review workflows, category management, and merchant-rule automation.",
-  "Designed around a calmer mobile experience, with dark visual treatment, clear hierarchy, and focused day-to-day actions.",
-  "Pairs product thinking with implementation detail, from Plaid-linked accounts to regex-based transaction rules and AI-assisted rule creation.",
+  "End-to-end iOS expense architecture combining direct Plaid bank syncing, automated ingestion, and local category structures.",
+  "Custom rule engine supporting regex-based merchant pattern matching and AI-assisted rule synthesis from plain English.",
+  "Calm, high-contrast mobile design system engineered for daily triage speed rather than passive chart gazing.",
 ];
 
 const meta = [
-  { label: "Type", value: "iOS app" },
-  {
-    label: "Core components",
-    value:
-      "Plaid account linking, transaction ingestion, review queue, regex merchant rules, AI-assisted rule creation, category management",
-  },
-  { label: "Focus", value: "Personal finance, transaction clarity, interaction design" },
-  { label: "Role", value: "Product thinking, design direction, software build" },
-  { label: "Status", value: "Active build" },
+  { label: "Platform", value: "iOS / Mobile" },
+  { label: "Architecture", value: "React Native · TypeScript · Plaid Link · Regex Engine · LLM Parser" },
+  { label: "Domain", value: "Personal Finance & Transaction Ingestion" },
+  { label: "Role", value: "Product Designer & Lead Engineer" },
+  { label: "Status", value: "Active Production Build" },
 ];
 
 const principles = [
   {
-    title: "Clarity over clutter",
-    body: "A finance app should make it easier to understand what happened, what needs attention, and what to do next. Centful strips the experience down to those decisions instead of crowding the screen with noise.",
+    title: "Zero-Clutter Triage",
+    body: "Most finance software overwhelms with redundant graphs. Centful reduces the daily loop to two actions: syncing transactions and clearing the uncategorized review queue.",
   },
   {
-    title: "Design as product logic",
-    body: "The interface is part of the functional model. Review queues, account sync states, date filtering, and category management all need to feel obvious, not just technically available.",
+    title: "Deterministic Rules + AI Synthesis",
+    body: "Instead of black-box categorization, the engine runs explicit regex rules. For users unfamiliar with regular expressions, an embedded LLM synthesizes valid regex patterns from plain-English descriptions.",
   },
   {
-    title: "Iteration through real use",
-    body: "Because the app is being shaped through actual day-to-day use, small workflow details matter. That includes things like safer swipe interactions, clearer review states, and screens that stay readable under real usage pressure.",
+    title: "System Transparency",
+    body: "Sync history, raw payload ingestion, and rule evaluation matches are fully inspectable by the user, creating trust through architectural honesty.",
   },
 ];
 
 const heroSlides: HeroSlide[] = [
   {
-    title: "Home",
+    title: "Home Cockpit",
     description:
-      "A simple landing screen focused on current-month spend, category visibility, and the two actions that matter most: reviewing transactions and syncing accounts.",
+      "A high-clarity landing interface focused on current-month burn rate, immediate review items, and bank sync state.",
     image: "/images/centful/home.png",
     alt: "Centful home dashboard showing current-month spend, review queue, and account shortcuts.",
   },
   {
     title: "Review Queue",
     description:
-      "A dedicated queue for uncategorized spend, with AI-assisted categorization layered on top of the rule-based workflow instead of replacing it.",
+      "A dedicated triage surface for unprocessed transactions, pairing manual approval with automated categorization suggestions.",
     image: "/images/centful/review-queue.png",
     alt: "Centful review queue with uncategorized transactions and AI-assisted categorization controls.",
   },
   {
-    title: "Accounts",
+    title: "Account Sync",
     description:
-      "Account linking and sync management live in one place, so the ingestion side of the product feels inspectable rather than hidden.",
+      "Direct bank connectivity and multi-institution state overview, exposing ingestion health and sync timestamps.",
     image: "/images/centful/accounts.png",
     alt: "Centful accounts screen with linked credit cards and bank accounts.",
   },
@@ -76,181 +72,181 @@ const heroSlides: HeroSlide[] = [
 
 const gallery = [
   {
-    title: "Sync history",
+    title: "Pipeline Sync Audit",
     description:
-      "Recent sync runs expose whether ingestion succeeded and how many rows were processed, which makes the data pipeline more legible to the user.",
+      "Every sync run exposes execution state, row counts, and error payloads, making backend health immediately visible inside the mobile UI.",
     image: "/images/centful/sync-history.png",
   },
   {
-    title: "Date filtering",
+    title: "Temporal Filtering Sheet",
     description:
-      "Transaction browsing includes a mobile-friendly date-range sheet with quick filters like this month, last month, last 30 days, and this year.",
+      "Custom date-range selector optimized for one-thumb reach, with instant temporal presets for monthly and annual reviews.",
     image: "/images/centful/date-filter.png",
   },
   {
-    title: "Merchant rules",
+    title: "Regex Rule Engine",
     description:
-      "Users can define regex-based merchant rules that automatically categorize matching transactions from the raw description, turning repeated cleanup work into reusable logic.",
+      "Allows users to build permanent categorization heuristics directly against raw merchant payloads, converting repetitive cleanup into automated rules.",
     image: "/images/centful/merchant-rules.png",
   },
   {
-    title: "AI-assisted regex creation",
+    title: "Natural Language Regex Synthesis",
     description:
-      "Instead of expecting users to write regex by hand, the app can generate a suggested pattern from a plain-English description of what they want to match, then let them review and save it.",
+      "Translates natural language matching intent into strict regex patterns using an integrated LLM prompt pipeline with preview verification.",
     image: "/images/centful/rule-create-generated.png",
   },
   {
-    title: "Settings and personalization",
+    title: "Taxonomy & Targets",
     description:
-      "The settings area gives the product a personal backbone: category management, merchant rules, and account-level state all live in clear, inspectable places.",
-    image: "/images/centful/settings.png",
+      "Custom category definitions paired with monthly expenditure targets that shape downstream analysis without rigid budgeting templates.",
+    image: "/images/centful/categories.png",
   },
   {
-    title: "Category management",
+    title: "Configuration Surface",
     description:
-      "Categories are treated as part of the user’s own spending model, with editable labels and monthly targets that shape how transactions get organized over time.",
-    image: "/images/centful/categories.png",
+      "Centralized settings architecture organizing data connections, export routines, and system preferences in an inspectable hierarchy.",
+    image: "/images/centful/settings.png",
   },
 ];
 
 export default function CentfulProjectPage() {
   return (
-    <main className="min-h-screen bg-ink-950 text-zinc-100">
+    <main className="min-h-screen bg-void text-bone">
       <ScrollProgress />
 
-      {/* ---------- hero ---------- */}
-      <section className="noise-overlay relative overflow-hidden border-b border-white/5">
+      {/* ---------- HERO ---------- */}
+      <section className="relative overflow-hidden border-b border-white/10 pt-28 sm:pt-36">
         <div aria-hidden className="grid-lines absolute inset-0" />
         <div
           aria-hidden
-          className="animate-aurora-a pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-emerald-500/12 blur-[130px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute bottom-[-30%] left-[-10%] h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[120px]"
+          className="pointer-events-none absolute right-[-10%] top-0 h-[500px] w-[500px] rounded-full bg-volt/10 blur-[130px]"
         />
 
-        <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 pb-20 pt-32 sm:px-10 lg:px-12">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-20 sm:px-10 lg:px-12">
           <BackLink />
 
           <div className="space-y-6">
             <Reveal y={16}>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
-                Centful
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-volt">
+                Case Study // 01
               </p>
             </Reveal>
+
             <Reveal delay={0.1}>
-              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-zinc-50 sm:text-6xl">
-                A personal finance app built to make spending review feel{" "}
-                <span className="font-serif italic text-gradient">calmer, clearer</span>, and more
-                usable.
+              <h1 className="max-w-5xl font-display text-[clamp(2.5rem,7vw,5.8rem)] font-extrabold uppercase leading-[0.94] tracking-tight text-bone">
+                Centful: A calmer <br />
+                <span className="font-serif italic font-normal normal-case text-volt">
+                  financial architecture
+                </span>{" "}
+                for iOS.
               </h1>
             </Reveal>
+
             <Reveal delay={0.2}>
-              <p className="max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl sm:leading-9">
-                Centful is an iOS expense tracker that combines account syncing, transaction review,
-                category management, and a more considered interaction model for everyday money
-                decisions.
+              <p className="max-w-3xl font-sans text-lg leading-8 text-fog sm:text-2xl sm:leading-10">
+                An iOS expense operating system combining direct Plaid sync, deterministic regex
+                rule automation, and an interaction model designed around daily clarity.
               </p>
             </Reveal>
           </div>
 
-          <Reveal delay={0.3} y={40}>
+          <Reveal delay={0.3} y={32}>
             <HeroSlider slides={heroSlides} imageWidth={1179} imageHeight={2556} />
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- body ---------- */}
-      <section className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-12">
-        <div className="space-y-8">
-          <SectionCard index={1} label="Problem" title="Why I built it">
+      {/* ---------- DOSSIER & CONTENT ---------- */}
+      <section className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-12">
+        <div className="space-y-12">
+          <SectionCard index={1} label="Genesis" title="The Problem Space">
             <p>
-              Most personal finance apps either bury the important actions under too much clutter
-              or reduce the experience to a bare utility that feels unpleasant to use repeatedly.
-              Centful started as a response to that gap.
+              Most personal finance software is either bloated with promotional offerings or
+              unnecessarily stressful to navigate. Users are bombarded with punitive red badges,
+              inaccurate auto-categorization, and opaque data pipelines that erode trust.
             </p>
             <p>
-              The goal was to build something that handled the practical job of transaction
-              tracking while still feeling composed, inspectable, and usable enough to become part
-              of a real routine.
-            </p>
-          </SectionCard>
-
-          <SectionCard index={2} label="Product scope" title="What the app actually does">
-            <p>
-              Centful is not just a static budgeting concept. The app includes linked account
-              management, Plaid-based syncing, a review queue for uncategorized spend, merchant
-              rule personalization, regex-based auto-categorization, category editing, and
-              transaction browsing with date-range filtering.
-            </p>
-            <p>
-              That matters because the product story is grounded in real workflows, not just mock
-              screens. The interface and data model are being shaped together.
+              Centful was conceived as an antidote: a quiet, high-performance mobile application
+              that treats transaction review with the same precision and calmness as a developer
+              code review.
             </p>
           </SectionCard>
 
-          <SectionCard index={3} label="Product principles" title="How I think about the product">
-            <div className="space-y-7">
+          <SectionCard index={2} label="System Scope" title="Functional Architecture">
+            <p>
+              Rather than presenting a static prototype, Centful operates on a live, end-to-end
+              technical stack. Key pillars include:
+            </p>
+            <ul className="space-y-3 pt-2 font-mono text-sm text-bone">
+              <li className="flex gap-3">
+                <span className="text-volt">▸</span> Plaid Link integration with token exchange and webhooks
+              </li>
+              <li className="flex gap-3">
+                <span className="text-volt">▸</span> Incremental sync pipeline preserving historical raw payloads
+              </li>
+              <li className="flex gap-3">
+                <span className="text-volt">▸</span> Fast deterministic rule engine evaluating user-crafted regex expressions
+              </li>
+              <li className="flex gap-3">
+                <span className="text-volt">▸</span> Natural-language-to-regex generator powered by an LLM prompt pipeline
+              </li>
+              <li className="flex gap-3">
+                <span className="text-volt">▸</span> Offline-first local state with optimistic UI reconciliation
+              </li>
+            </ul>
+          </SectionCard>
+
+          <SectionCard index={3} label="Design Language" title="Product Philosophy">
+            <div className="space-y-8">
               {principles.map((principle) => (
                 <div key={principle.title} className="space-y-2">
-                  <h3 className="text-lg font-semibold tracking-tight text-zinc-50">
+                  <h3 className="font-display text-xl font-bold uppercase tracking-tight text-bone">
                     {principle.title}
                   </h3>
-                  <p>{principle.body}</p>
+                  <p className="text-base text-fog">{principle.body}</p>
                 </div>
               ))}
             </div>
           </SectionCard>
 
-          <Reveal>
-            <div className="space-y-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-7 sm:p-9">
-              <div className="space-y-3">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-xs text-emerald-300">04</span>
-                  <span className="h-px w-8 bg-white/15" />
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
-                    Product walkthrough
-                  </p>
-                </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
-                  How the experience comes together
-                </h2>
-              </div>
-
-              <div className="space-y-6">
-                {gallery.map((item, i) => (
-                  <GalleryItem
-                    key={item.title}
-                    index={i + 1}
-                    title={item.title}
-                    description={item.description}
-                    image={item.image}
-                    imageWidth={1179}
-                    imageHeight={2556}
-                  />
-                ))}
-              </div>
+          {/* walkthrough */}
+          <div className="space-y-8 border-t border-white/10 pt-10">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-volt">
+                /04 Detailed Walkthrough
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-extrabold uppercase tracking-tight text-bone sm:text-4xl">
+                System Interface Breakdown
+              </h2>
             </div>
-          </Reveal>
+            <div className="space-y-6">
+              {gallery.map((item, i) => (
+                <GalleryItem
+                  key={item.title}
+                  index={i + 1}
+                  title={item.title}
+                  description={item.description}
+                  image={item.image}
+                  imageWidth={1179}
+                  imageHeight={2556}
+                />
+              ))}
+            </div>
+          </div>
 
-          <SectionCard index={5} label="What this project shows" title="Why it matters">
+          <SectionCard index={5} label="Retrospective" title="Key Learnings & Impact">
             <p>
-              Centful shows how I like to build products: start with a real friction point,
-              define the workflow that actually matters, and keep tightening the system until the
-              result feels substantially better than the default tools.
-            </p>
-            <p>
-              It also reflects a pattern I care about a lot, which is that useful software is not
-              only about features. It is also about trust, legibility, and how a product behaves
-              when someone returns to it every day.
+              Building Centful demonstrated how much cognitive overhead can be eliminated when
+              software respects the user&apos;s attention. By pairing transparent data mechanics with
+              unforgiving interaction craft, everyday finance transitions from an anxiety source
+              into a clean daily ritual.
             </p>
           </SectionCard>
 
           <NextProject
-            name="Bitebook"
-            href="/projects/bitebook"
-            blurb="A recipe product built around saving what works, remixing what doesn't, and cooking with more confidence."
+            name="Job Analytics Platform"
+            href="/projects/job-search-analytics"
+            blurb="Automated opportunity discovery pipeline combining 24h LinkedIn ingestion, algorithmic scoring, and LLM drafting."
           />
         </div>
 
