@@ -1,5 +1,14 @@
 import Link from "next/link";
 
+type ScoringConfig = {
+  weights?: {
+    positive?: Record<string, number>;
+    negative?: Record<string, number>;
+  };
+};
+
+const SCORING_CONFIG_URL = "https://raw.githubusercontent.com/mikhailverghese/job-checker/main/config/scoring-config.json";
+
 const highlights = [
   "Analyzes LinkedIn job postings published within the previous 24 hours and ranks them with a configurable recommendation engine.",
   "Uses a scheduled Python pipeline to pull only newly published postings, refresh the public dataset, and reduce duplicate recommendations.",
@@ -28,7 +37,7 @@ const sections = [
     title: "How job opportunities are ranked",
     body: [
       "The ranking logic is driven by a configurable rule-based recommendation engine. Jobs are evaluated across multiple criteria, including title signals, description keywords, location preferences, and configurable scoring thresholds.",
-      "The current setup uses weighted positive and negative matches. Positive examples include terms like Python, SQL, dbt, BigQuery, and Power BI. Negative examples include terms like Kafka, Airflow, Spark, Databricks, DAX, JavaScript, and machine learning. The idea is to reward the strongest-fit postings while pushing less relevant roles down the list.",
+      "The live positive and negative keyword sets are now pulled directly from the public scoring config in the job-checker repository, so the portfolio stays in sync with the real scoring model instead of relying on hardcoded examples.",
     ],
   },
   {
@@ -65,7 +74,46 @@ const sections = [
   },
 ];
 
-export default function JobSearchAnalyticsProjectPage() {
+async function getScoringConfig(): Promise<ScoringConfig | null> {
+  try {
+    const response = await fetch(SCORING_CONFIG_URL, {
+      next: { revalidate: 3600 },
+    });
+
+    if (!response.ok) return null;
+    return (await response.json()) as ScoringConfig;
+  } catch {
+    return null;
+  }
+}
+
+function renderKeywordEntries(entries: Record<string, number> | undefined, tone: "positive" | "negative") {
+  if (!entries || !Object.keys(entries).length) {
+    return <p className="text-sm leading-7 text-zinc-500">No keywords available.</p>;
+  }
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {Object.entries(entries).map(([term, score]) => (
+        <span
+          key={`${tone}-${term}`}
+          className={`rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] ${tone === "positive"
+            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+            : "border-rose-200 bg-rose-50 text-rose-700"
+            }`}
+        >
+          {term} ({score > 0 ? `+${score}` : score})
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export default async function JobSearchAnalyticsProjectPage() {
+  const scoringConfig = await getScoringConfig();
+  const positiveKeywords = scoringConfig?.weights?.positive;
+  const negativeKeywords = scoringConfig?.weights?.negative;
+
   return (
     <main className="min-h-screen bg-[#f5f3ef] text-zinc-950">
       <section className="border-b border-black/5 bg-white">
@@ -129,6 +177,34 @@ export default function JobSearchAnalyticsProjectPage() {
               </div>
             </div>
           ))}
+
+          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                Live scoring config
+              </p>
+              <h2 className="text-2xl font-semibold tracking-tight">Current keyword weights from the public repo</h2>
+              <p className="text-base leading-8 text-zinc-600">
+                This section reads directly from the public <code>config/scoring-config.json</code> file in the job-checker repository, so the portfolio stays aligned with the live scoring model.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="space-y-4 rounded-[1.25rem] border border-emerald-100 bg-emerald-50/60 p-5">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Positive keywords</p>
+                </div>
+                {renderKeywordEntries(positiveKeywords, "positive")}
+              </div>
+
+              <div className="space-y-4 rounded-[1.25rem] border border-rose-100 bg-rose-50/60 p-5">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-rose-700">Negative keywords</p>
+                </div>
+                {renderKeywordEntries(negativeKeywords, "negative")}
+              </div>
+            </div>
+          </div>
         </div>
 
         <aside className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-7 text-white shadow-[0_20px_80px_rgba(24,24,27,0.18)]">
