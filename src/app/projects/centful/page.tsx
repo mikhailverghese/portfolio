@@ -26,14 +26,14 @@ const principles = [
 
 const heroSlides = [
   {
-    title: "Home dashboard",
+    title: "Home",
     description:
       "A simple landing screen focused on current-month spend, category visibility, and the two actions that matter most: reviewing transactions and syncing accounts.",
     image: "/images/centful/home.png",
     alt: "Centful home dashboard showing current-month spend, review queue, and account shortcuts.",
   },
   {
-    title: "Review queue",
+    title: "Review Queue",
     description:
       "A dedicated queue for uncategorized spend, with AI-assisted categorization layered on top of the rule-based workflow instead of replacing it.",
     image: "/images/centful/review-queue.png",
