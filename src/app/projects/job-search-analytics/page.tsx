@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { JobDashboardHeroSlider } from "@/components/JobDashboardHeroSlider";
+
 type ScoringConfig = {
   weights?: {
     positive?: Record<string, number>;
@@ -16,13 +18,25 @@ const highlights = [
   "Ships with a live Next.js dashboard and API-backed cover-letter generation with direct PDF download.",
 ];
 
-const dashboardGallery = [
+const heroSlides = [
   {
-    title: "Dashboard hero",
-    description:
-      "The redesigned dashboard opens with a live pipeline snapshot that frames the dataset as a ranked feed instead of a static table dump.",
+    title: "Hero",
     image: "/images/job-checker/hero-mobile.png",
+    alt: "Job Checker dashboard hero showing weighted job matches and live pipeline stats.",
   },
+  {
+    title: "Cards",
+    image: "/images/job-checker/cards-mobile.png",
+    alt: "Job Checker ranked job cards with scores, tags, and cover letter actions.",
+  },
+  {
+    title: "Letter View",
+    image: "/images/job-checker/letter-mobile.png",
+    alt: "Job Checker cover letter view with PDF download action.",
+  },
+];
+
+const dashboardGallery = [
   {
     title: "Filter controls",
     description:
@@ -193,44 +207,7 @@ export default async function JobSearchAnalyticsProjectPage() {
             </div>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[2rem] border border-black/8 bg-zinc-950 p-4 shadow-[0_24px_80px_rgba(24,24,27,0.16)]">
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                <Image
-                  src="/images/job-checker/hero-mobile.png"
-                  alt="Job Checker dashboard hero showing weighted job matches and live pipeline stats."
-                  width={1106}
-                  height={2266}
-                  className="h-auto w-full"
-                  priority
-                />
-              </div>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)] sm:translate-y-8">
-                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
-                  <Image
-                    src="/images/job-checker/cards-mobile.png"
-                    alt="Job Checker ranked job cards with scores, tags, and cover letter actions."
-                    width={1106}
-                    height={2266}
-                    className="h-auto w-full"
-                  />
-                </div>
-              </div>
-              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)]">
-                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
-                  <Image
-                    src="/images/job-checker/letter-mobile.png"
-                    alt="Job Checker cover letter view with PDF download action."
-                    width={1106}
-                    height={2266}
-                    className="h-auto w-full"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <JobDashboardHeroSlider slides={heroSlides} />
         </div>
       </section>
 
