@@ -1,23 +1,69 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const highlights = [
-  "Built as a personal response to the friction and clutter common in everyday finance tools.",
-  "Focused on transaction clarity, thoughtful interaction design, and a more composed mobile experience.",
-  "Designed as an ongoing product, not just a one-off interface exercise.",
+  "Built as a personal finance app with direct bank connectivity, review workflows, and category management.",
+  "Designed around a calmer mobile experience, with dark visual treatment, clear hierarchy, and focused day-to-day actions.",
+  "Pairs product thinking with implementation detail, from Plaid-linked accounts to transaction review and merchant-rule personalization.",
 ];
 
 const principles = [
   {
     title: "Clarity over clutter",
-    body: "Financial software often tries to do too much at once. Centful pushes in the other direction by prioritizing readability, hierarchy, and a stronger sense of focus.",
+    body: "A finance app should make it easier to understand what happened, what needs attention, and what to do next. Centful strips the experience down to those decisions instead of crowding the screen with noise.",
   },
   {
     title: "Design as product logic",
-    body: "The interface decisions are not just aesthetic. They shape whether data feels trustworthy, understandable, and usable in everyday life.",
+    body: "The interface is part of the functional model. Review queues, account sync states, date filtering, and category management all need to feel obvious, not just technically available.",
   },
   {
     title: "Iteration through real use",
-    body: "Because the project comes from a real personal need, the product direction is informed by repeated use, friction points, and refinement over time.",
+    body: "Because the app is being shaped through actual day-to-day use, small workflow details matter. That includes things like safer swipe interactions, clearer review states, and screens that stay readable under real usage pressure.",
+  },
+];
+
+const gallery = [
+  {
+    title: "Home dashboard",
+    description:
+      "The landing screen is intentionally simple: current-month spend, category breakdown, and direct access to the review queue and account sync flow.",
+    image: "/images/centful/home.png",
+  },
+  {
+    title: "Accounts and Plaid sync",
+    description:
+      "Linked accounts are visible in one place, alongside the Plaid connection path and recent sync activity. The goal is to make ingestion status feel transparent instead of hidden behind setup screens.",
+    image: "/images/centful/accounts.png",
+  },
+  {
+    title: "Sync history",
+    description:
+      "Recent sync runs expose whether ingestion succeeded and how many rows were processed, which makes the data pipeline more legible to the user.",
+    image: "/images/centful/sync-history.png",
+  },
+  {
+    title: "Date filtering",
+    description:
+      "Transaction browsing includes a mobile-friendly date-range sheet with quick filters like this month, last month, last 30 days, and this year.",
+    image: "/images/centful/date-filter.png",
+  },
+  {
+    title: "Review queue",
+    description:
+      "Unassigned transactions are surfaced in a dedicated review workflow, with support for AI-assisted categorization after rule-based passes run first.",
+    image: "/images/centful/review-queue.png",
+  },
+  {
+    title: "Settings and personalization",
+    description:
+      "The settings area gives the product a personal backbone: category management, merchant rules, and account-level state all live in clear, inspectable places.",
+    image: "/images/centful/settings.png",
+  },
+  {
+    title: "Category management",
+    description:
+      "Categories are treated as part of the user’s own spending model, with editable labels and monthly targets that shape how transactions get organized over time.",
+    image: "/images/centful/categories.png",
   },
 ];
 
@@ -38,13 +84,52 @@ export default function CentfulProjectPage() {
               Centful
             </p>
             <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              Reimagining personal finance software as something more intuitive, focused, and genuinely useful.
+              A personal finance app built to make spending review feel calmer, clearer, and more usable.
             </h1>
             <p className="max-w-3xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              Centful is an iOS expense tracker built around a simple belief: money tools do not
-              have to feel noisy, stressful, or mechanically cold. They can feel deliberate,
-              intuitive, and easier to trust.
+              Centful is an iOS expense tracker that combines account syncing, transaction review,
+              category management, and a more considered interaction model for everyday money
+              decisions.
             </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="rounded-[2rem] border border-black/8 bg-zinc-950 p-4 shadow-[0_24px_80px_rgba(24,24,27,0.16)]">
+              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
+                <Image
+                  src="/images/centful/home.png"
+                  alt="Centful home dashboard showing current-month spend, review queue, and account shortcuts."
+                  width={1179}
+                  height={2556}
+                  className="h-auto w-full"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)] sm:translate-y-8">
+                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
+                  <Image
+                    src="/images/centful/review-queue.png"
+                    alt="Centful review queue with uncategorized transactions and AI-assisted categorization controls."
+                    width={1179}
+                    height={2556}
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
+              <div className="rounded-[1.75rem] border border-black/8 bg-zinc-950 p-3 shadow-[0_20px_60px_rgba(24,24,27,0.14)]">
+                <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black">
+                  <Image
+                    src="/images/centful/accounts.png"
+                    alt="Centful accounts screen with linked credit cards and bank accounts."
+                    width={1179}
+                    height={2556}
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -58,33 +143,33 @@ export default function CentfulProjectPage() {
             <h2 className="text-2xl font-semibold tracking-tight">Why I built it</h2>
             <div className="space-y-4 text-base leading-8 text-zinc-600">
               <p>
-                Most personal finance apps sit at one of two extremes. They either overwhelm you
-                with noise, complexity, and visual clutter, or they reduce everything to a dry
-                utility that technically works but feels unpleasant to live with.
+                Most personal finance apps either bury the important actions under too much clutter
+                or reduce the experience to a bare utility that feels unpleasant to use repeatedly.
+                Centful started as a response to that gap.
               </p>
               <p>
-                Centful started because I wanted something better for my own life, a tool that made
-                it easier to understand spending, review transactions, and stay organized without
-                making the experience feel heavier than the problem itself.
+                The goal was to build something that handled the practical job of transaction
+                tracking while still feeling composed, inspectable, and usable enough to become part
+                of a real routine.
               </p>
             </div>
           </div>
 
           <div className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Approach
+              Product scope
             </p>
-            <h2 className="text-2xl font-semibold tracking-tight">What the product focuses on</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">What the app actually does</h2>
             <div className="space-y-4 text-base leading-8 text-zinc-600">
               <p>
-                The product centers on transaction visibility, account connectivity, and interface
-                decisions that reduce friction in the day-to-day experience of managing money.
+                Centful is not just a static budgeting concept. The app includes linked account
+                management, Plaid-based syncing, a review queue for uncategorized spend, merchant
+                rule personalization, category editing, and transaction browsing with date-range
+                filtering.
               </p>
               <p>
-                Instead of treating design as decoration layered on top of financial data, Centful
-                treats design as part of the product logic itself. The way information is grouped,
-                surfaced, and interacted with directly affects whether the experience feels useful
-                or exhausting.
+                That matters because the product story is grounded in real workflows, not just mock
+                screens. The interface and data model are being shaped together.
               </p>
             </div>
           </div>
@@ -105,19 +190,51 @@ export default function CentfulProjectPage() {
             </div>
           </div>
 
+          <div className="space-y-6 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                Product walkthrough
+              </p>
+              <h2 className="text-2xl font-semibold tracking-tight">How the experience comes together</h2>
+            </div>
+
+            <div className="space-y-8">
+              {gallery.map((item) => (
+                <div key={item.title} className="grid gap-5 rounded-[1.5rem] border border-black/6 bg-zinc-50/70 p-5 md:grid-cols-[0.78fr_1.22fr] md:items-center">
+                  <div className="mx-auto w-full max-w-[260px] rounded-[1.5rem] border border-black/10 bg-zinc-950 p-3 shadow-[0_16px_40px_rgba(24,24,27,0.12)]">
+                    <div className="overflow-hidden rounded-[1.2rem] border border-white/10 bg-black">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={1179}
+                        height={2556}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-semibold tracking-tight text-zinc-950">{item.title}</h3>
+                    <p className="text-base leading-8 text-zinc-600">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-4 rounded-[1.75rem] border border-black/8 bg-white p-7 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
               What this project shows
             </p>
             <div className="space-y-4 text-base leading-8 text-zinc-600">
               <p>
-                Centful is a good example of how I like to work: start with a real irritation, turn
-                it into a product problem, and keep refining until the solution feels meaningfully
-                better than the default options.
+                Centful shows how I like to build products: start with a real friction point,
+                define the workflow that actually matters, and keep tightening the system until the
+                result feels substantially better than the default tools.
               </p>
               <p>
-                It also reflects a bigger pattern in my work, that I care a lot about not just what
-                software does, but how it feels to use when it becomes part of someone’s routine.
+                It also reflects a pattern I care about a lot, which is that useful software is not
+                only about features. It is also about trust, legibility, and how a product behaves
+                when someone returns to it every day.
               </p>
             </div>
           </div>
@@ -143,8 +260,12 @@ export default function CentfulProjectPage() {
                 <span className="font-semibold text-white">Type:</span> iOS app
               </p>
               <p>
+                <span className="font-semibold text-white">Core components:</span> Plaid account linking,
+                transaction ingestion, review queue, merchant rules, category management
+              </p>
+              <p>
                 <span className="font-semibold text-white">Focus:</span> personal finance,
-                transaction clarity, UX
+                transaction clarity, interaction design
               </p>
               <p>
                 <span className="font-semibold text-white">Role:</span> product thinking,
