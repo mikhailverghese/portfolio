@@ -11,9 +11,9 @@ type ScoringConfig = {
 const SCORING_CONFIG_URL = "https://raw.githubusercontent.com/mikhailverghese/job-checker/main/config/scoring-config.json";
 
 const highlights = [
-  "Analyzes LinkedIn job postings published within the previous 24 hours and ranks them with a configurable recommendation engine.",
-  "Uses a scheduled Python pipeline to pull only newly published postings, refresh the public dataset, and reduce duplicate recommendations.",
-  "Ships with a live Next.js dashboard and API-backed cover-letter generation flow, including downloadable PDF output.",
+  "Scores newly posted LinkedIn roles with a configurable rule-based recommendation engine.",
+  "Uses a scheduled Python pipeline to refresh a public-safe dataset and reduce duplicate recommendations.",
+  "Ships with a live Next.js dashboard and API-backed cover-letter generation with direct PDF download.",
 ];
 
 const dashboardGallery = [
@@ -48,8 +48,8 @@ const sections = [
     label: "Overview",
     title: "What the platform does",
     body: [
-      "The Intelligent Job Search Analytics Platform is an automated system for identifying, prioritizing, and acting on relevant LinkedIn job postings. Instead of treating a job search like a manual browsing exercise, it turns the process into something more structured, repeatable, and analytically driven.",
-      "At its core, the platform looks at newly published roles, scores them against configurable rules, and surfaces the strongest opportunities in a live web dashboard designed for action rather than noise.",
+      "The Intelligent Job Search Analytics Platform is an automated system for identifying, prioritizing, and acting on relevant LinkedIn job postings. Instead of treating a job search like manual browsing, it turns the process into something structured, repeatable, and analytically driven.",
+      "At its core, the platform evaluates newly published roles against configurable rules and surfaces the strongest opportunities in a live web dashboard built for action rather than noise.",
     ],
   },
   {
@@ -57,22 +57,22 @@ const sections = [
     title: "How the search process begins",
     body: [
       "The workflow begins with a defined set of target search titles. The current configuration uses four: Analytics Engineer, BI Engineer, BI Analyst, and Data Analyst.",
-      "For each of those search titles, the system reviews up to 50 LinkedIn results and limits the dataset to roles published within the previous 24 hours. That keeps the search targeted, current, and grounded in a repeatable intake process rather than ad hoc browsing.",
+      "For each of those titles, the system reviews up to 50 LinkedIn results and limits the dataset to roles published within the previous 24 hours. That keeps the search targeted, current, and grounded in a repeatable intake process.",
     ],
   },
   {
     label: "Recommendation engine",
     title: "How job opportunities are ranked",
     body: [
-      "The ranking logic is driven by a configurable rule-based recommendation engine. Jobs are evaluated across multiple criteria, including title signals, description keywords, location preferences, and configurable scoring thresholds.",
-      "The live positive and negative keyword sets are now pulled directly from the public scoring config in the job-checker repository, so the portfolio stays in sync with the real scoring model instead of relying on hardcoded examples.",
+      "The ranking logic is driven by a configurable rule-based recommendation engine. Jobs are evaluated across title signals, description keywords, location preferences, and score thresholds.",
+      "The positive and negative keyword sets shown below are pulled directly from the public scoring config in the job-checker repository, so the portfolio stays in sync with the real scoring model instead of relying on hardcoded examples.",
     ],
   },
   {
     label: "Scoring criteria",
     title: "What the engine looks at",
     body: [
-      "The scoring model does not rely on just one field. It incorporates keyword logic from the job description, title-based rules, and location-based preferences. In the active configuration, location is explicitly part of the scoring logic, with positive weighting for places like Piscataway, New Brunswick, Princeton, Rahway, Iselin, and Edison, while also allowing remote roles.",
+      "The scoring model does not rely on a single field. It incorporates keyword logic from the job description, title-based rules, and location-based preferences. In the active configuration, location is explicitly part of the scoring logic, with positive weighting for places like Piscataway, New Brunswick, Princeton, Rahway, Iselin, and Edison, while still allowing remote roles.",
       "The system also uses thresholding to control quality, including a minimum score requirement and a minimum number of positive matches before a role is surfaced. That helps the dashboard stay focused on opportunities that are both recent and genuinely relevant.",
     ],
   },
@@ -81,7 +81,7 @@ const sections = [
     title: "How the dashboard evolved visually",
     body: [
       "Once the underlying pipeline and application flow were working reliably, I treated the dashboard itself as a product design problem rather than a basic admin interface. The result is a more cinematic, motion-rich frontend that frames the job feed as something active, filtered, and decision-oriented.",
-      "The redesign leans into visual hierarchy, animated feedback, richer card presentation, and a stronger sense of momentum, while leaving the underlying data logic and backend behavior intact.",
+      "The redesign leans on stronger hierarchy, animated feedback, richer card presentation, and a clearer sense of momentum, while leaving the underlying data logic and backend behavior intact.",
     ],
   },
   {
@@ -89,7 +89,7 @@ const sections = [
     title: "How the dashboard stays current",
     body: [
       "A scheduled Python pipeline runs daily and retrieves only job postings published within the previous 24 hours. It exports a public-safe dataset that the dashboard reads directly, which keeps the live site focused on fresh opportunities while reducing repeat surfacing of stale listings.",
-      "By narrowing the retrieval window, storing seen jobs, and refreshing the published dataset on a repeatable cadence, the system helps maintain a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
+      "By narrowing the retrieval window, storing seen jobs, and refreshing the published dataset on a repeatable cadence, the system maintains a stream of actionable recommendations without creating unnecessary duplication or review fatigue.",
     ],
   },
   {
@@ -97,14 +97,14 @@ const sections = [
     title: "How it supports tailored applications",
     body: [
       "Beyond ranking and surfacing jobs, the platform also includes an application support workflow built into the public app. It combines structured candidate profile data with selected job descriptions, then uses an LLM API to generate tailored cover letters on demand.",
-      "The goal is not generic automation for its own sake. The goal is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, then let the user review or download them immediately from the dashboard flow.",
+      "The goal is not generic automation for its own sake. It is to produce draft materials that better reflect both the candidate's background and the role's specific requirements, then let the user review or download them immediately from the dashboard flow.",
     ],
   },
   {
     label: "Why it matters",
     title: "What this project shows",
     body: [
-      "This project sits at a useful intersection of analytics, workflow design, and applied automation. It shows how structured logic, data pipelines, and orchestration tools can work together to improve a messy real-world process.",
+      "This project sits at a useful intersection of analytics, workflow design, and applied automation. It shows how structured logic, data pipelines, and orchestration can improve a messy real-world process.",
       "It also reflects the kind of systems I like building: practical tools that reduce noise, clarify priorities, and help people move from raw information to better decisions.",
     ],
   },
