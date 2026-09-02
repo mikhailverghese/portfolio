@@ -20,12 +20,17 @@ const highlights = [
 
 const heroSlides = [
   {
-    title: "Hero",
+    title: "Summary",
     image: "/images/job-checker/hero-mobile.png",
     alt: "Job Checker dashboard hero showing weighted job matches and live pipeline stats.",
   },
   {
-    title: "Cards",
+    title: "Filters",
+    image: "/images/job-checker/filters-mobile.png",
+    alt: "Job Checker filter controls for applicant, score, salary, location, and search.",
+  },
+  {
+    title: "Jobs",
     image: "/images/job-checker/cards-mobile.png",
     alt: "Job Checker ranked job cards with scores, tags, and cover letter actions.",
   },
