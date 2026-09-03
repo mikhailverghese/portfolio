@@ -42,8 +42,9 @@ export function MagneticLink({
     "group relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden px-8 py-3 font-mono text-xs font-bold uppercase tracking-[0.22em] transition-colors duration-300";
   const styles =
     variant === "primary"
-      ? "bg-volt text-[#0a0a0b] hover:bg-bone hover:text-[#0a0a0b]"
+      ? "bg-volt hover:bg-bone"
       : "border border-white/20 bg-transparent text-bone hover:border-volt hover:text-volt";
+  const inlineStyle = variant === "primary" ? { color: "#0a0a0b" } : undefined;
 
   const inner = (
     <>
@@ -66,11 +67,17 @@ export function MagneticLink({
       className="inline-block"
     >
       {external ? (
-        <a href={href} target="_blank" rel="noreferrer" className={`${base} ${styles} ${className}`}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className={`${base} ${styles} ${className}`}
+          style={inlineStyle}
+        >
           {inner}
         </a>
       ) : (
-        <Link href={href} className={`${base} ${styles} ${className}`}>
+        <Link href={href} className={`${base} ${styles} ${className}`} style={inlineStyle}>
           {inner}
         </Link>
       )}
