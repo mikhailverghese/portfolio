@@ -1,17 +1,7 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-  useVelocity,
-} from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
 
 export type WorkProject = {
   name: string;
@@ -28,67 +18,8 @@ type WorkIndexProps = {
 };
 
 export function WorkIndex({ projects }: WorkIndexProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const [active, setActive] = useState<number | null>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 160, damping: 20, mass: 0.5 });
-  const springY = useSpring(y, { stiffness: 160, damping: 20, mass: 0.5 });
-  const xVelocity = useVelocity(springX);
-  const rotate = useTransform(xVelocity, [-1200, 1200], [-7, 7], { clamp: true });
-
-  const onMouseMove = (event: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    x.set(event.clientX - rect.left);
-    y.set(event.clientY - rect.top);
-  };
-
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={reduce ? undefined : onMouseMove}
-      onMouseLeave={() => setActive(null)}
-      className="relative"
-    >
-      {/* floating preview (desktop) */}
-      <AnimatePresence>
-        {active !== null && !reduce && (
-          <motion.div
-            key="preview"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            style={{ x: springX, y: springY, rotate }}
-            className="pointer-events-none absolute left-0 top-0 z-20 hidden lg:block"
-          >
-            <div className="-ml-40 -mt-28 h-56 w-80 overflow-hidden border border-white/15 bg-panel shadow-[0_32px_90px_rgba(0,0,0,0.7)]">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.div
-                  key={active}
-                  initial={{ clipPath: "inset(100% 0 0 0)" }}
-                  animate={{ clipPath: "inset(0% 0 0 0)" }}
-                  exit={{ clipPath: "inset(0 0 100% 0)" }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full w-full"
-                >
-                  <Image
-                    src={projects[active].image}
-                    alt=""
-                    width={projects[active].imageWidth}
-                    height={projects[active].imageHeight}
-                    className="h-full w-full object-cover object-top"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+    <div className="relative">
       {/* rows */}
       <div className="border-b border-white/10">
         {projects.map((project, index) => (
@@ -96,7 +27,6 @@ export function WorkIndex({ projects }: WorkIndexProps) {
             key={project.name}
             href={project.href}
             data-cursor-label="VIEW"
-            onMouseEnter={() => setActive(index)}
             className="group relative block overflow-hidden border-t border-white/10"
           >
             <span
