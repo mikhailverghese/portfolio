@@ -42,7 +42,7 @@ export function MagneticLink({
     "group relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden px-8 py-3 font-mono text-xs font-bold uppercase tracking-[0.22em] transition-colors duration-300";
   const styles =
     variant === "primary"
-      ? "bg-volt text-void hover:bg-bone"
+      ? "bg-volt text-[#0a0a0b] hover:bg-bone hover:text-[#0a0a0b]"
       : "border border-white/20 bg-transparent text-bone hover:border-volt hover:text-volt";
 
   const inner = (
