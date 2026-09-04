@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useSyncExternalStore } from "react";
 
 export type TitleWord = {
   t: string;
@@ -15,10 +16,50 @@ type HeroTitleProps = {
   as?: "h1" | "h2";
 };
 
+function subscribeToCompactViewport(callback: () => void) {
+  const media = window.matchMedia("(max-width: 1023px)");
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
+function getCompactViewportSnapshot() {
+  return window.matchMedia("(max-width: 1023px)").matches;
+}
+
 export function HeroTitle({ lines, className = "", delay = 0.2, as = "h1" }: HeroTitleProps) {
   const reduce = useReducedMotion();
+  const compactViewport = useSyncExternalStore(
+    subscribeToCompactViewport,
+    getCompactViewportSnapshot,
+    () => false,
+  );
   const Tag = as === "h1" ? motion.h1 : motion.h2;
+  const StaticTag = as;
   let wordIndex = 0;
+
+  if (reduce || compactViewport) {
+    return (
+      <StaticTag className={className}>
+        {lines.map((line, lineIndex) => (
+          <span key={lineIndex} className="block">
+            {line.map((word, wordIndex) => {
+              const style = word.accent
+                ? "font-serif italic font-normal normal-case text-volt pr-[0.06em]"
+                : word.outline
+                  ? "text-outline"
+                  : "";
+              return (
+                <span key={`${word.t}-${wordIndex}`} className={style}>
+                  {word.t}
+                  {wordIndex < line.length - 1 ? "\u00A0" : ""}
+                </span>
+              );
+            })}
+          </span>
+        ))}
+      </StaticTag>
+    );
+  }
 
   return (
     <Tag className={className}>
