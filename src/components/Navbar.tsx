@@ -96,7 +96,7 @@ export function Navbar() {
                     className="group grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-4 border-b border-white/10 py-6"
                   >
                     <span className="font-mono text-xs text-volt">0{i + 1}</span>
-                    <span className="min-w-0 font-display text-[clamp(2.35rem,11vw,3rem)] font-extrabold uppercase leading-none tracking-tight text-bone transition group-hover:text-volt sm:text-5xl">
+                    <span className="min-w-0 font-display text-[clamp(1.95rem,8.9vw,2.65rem)] font-extrabold uppercase leading-none tracking-[-0.035em] text-bone transition group-hover:text-volt sm:text-5xl">
                       {link.label}
                     </span>
                   </Link>
