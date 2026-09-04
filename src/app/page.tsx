@@ -194,17 +194,16 @@ export default function Home() {
       {/* ---------- MANIFESTO (Scroll-Linked) ---------- */}
       <section id="about" className="relative border-b border-white/10 bg-panel/40 py-24 sm:py-36">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
-          <div className="mb-12 flex items-center justify-between font-mono text-xs uppercase tracking-[0.25em] text-fog">
+          <div className="mb-12 flex items-center font-mono text-xs uppercase tracking-[0.25em] text-fog">
             <span className="flex items-center gap-2">
               <span className="text-volt">/02</span>
               <span>Manifesto</span>
             </span>
-            <span>Scroll to read</span>
           </div>
 
           <Manifesto
             words={manifestoWords}
-            className="font-display text-[clamp(2rem,4.8vw,4.5rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-bone"
+            className="max-w-5xl font-sans text-[clamp(1.4rem,2.8vw,2.5rem)] font-medium leading-[1.38] tracking-[-0.02em] text-bone"
           />
         </div>
       </section>
