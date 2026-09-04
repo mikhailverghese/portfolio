@@ -165,7 +165,7 @@ export default async function Home() {
               <span className="text-volt">/01</span>
               <span>Engineering + Design</span>
             </span>
-            <span className="flex items-center gap-2 text-bone">
+            <span className="hidden items-center gap-2 text-bone sm:flex">
               <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-volt" />
               Available for high-impact roles
             </span>
