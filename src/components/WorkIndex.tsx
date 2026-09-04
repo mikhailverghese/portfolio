@@ -41,6 +41,8 @@ export function WorkIndex({ projects }: WorkIndexProps) {
                   alt={`${project.name} preview`}
                   width={project.imageWidth}
                   height={project.imageHeight}
+                  priority={index === 0}
+                  sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 64px), 0px"
                   className="aspect-[16/10] w-full object-cover object-top"
                 />
               </span>

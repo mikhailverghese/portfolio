@@ -211,7 +211,7 @@ export default async function Home() {
       <Marquee items={marqueeItems} />
 
       {/* ---------- MANIFESTO (Scroll-Linked) ---------- */}
-      <section id="about" className="relative border-b border-white/10 bg-panel/40 py-24 sm:py-36">
+      <section id="about" className="relative border-b border-white/10 bg-panel/40 py-20 sm:py-28 lg:py-36">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
           <div className="mb-12 flex items-center font-mono text-xs uppercase tracking-[0.25em] text-fog">
             <span className="flex items-center gap-2">
@@ -233,8 +233,8 @@ export default async function Home() {
       </section>
 
       {/* ---------- SELECTED WORK ---------- */}
-      <section id="projects" className="relative mx-auto w-full max-w-7xl px-6 py-24 sm:px-10 sm:py-36 lg:px-12">
-        <div className="mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section id="projects" className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-10 sm:py-24 lg:px-12 lg:py-36">
+        <div className="mb-10 flex flex-col gap-6 sm:mb-14 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-volt">
               /03 Index of Systems
