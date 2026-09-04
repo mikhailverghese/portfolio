@@ -1,14 +1,12 @@
 import { Capabilities, type Capability } from "@/components/Capabilities";
 import { Counter } from "@/components/Counter";
 import { HeroTitle } from "@/components/HeroTitle";
-import { LocalTime } from "@/components/LocalTime";
 import { MagneticLink } from "@/components/MagneticLink";
 import { Manifesto } from "@/components/Manifesto";
 import { Marquee } from "@/components/Marquee";
 import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { Preloader } from "@/components/Preloader";
-import { RotatingBadge } from "@/components/RotatingBadge";
 import { WorkIndex, type WorkProject } from "@/components/WorkIndex";
 
 const featuredProjects: WorkProject[] = [
@@ -150,7 +148,6 @@ export default function Home() {
               <span className="text-volt">/01</span>
               <span>Engineering + Design</span>
             </span>
-            <LocalTime className="hidden sm:inline" />
             <span className="flex items-center gap-2 text-bone">
               <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-volt" />
               Available for high-impact roles
@@ -188,10 +185,6 @@ export default function Home() {
                   <span aria-hidden>↗</span>
                 </MagneticLink>
               </div>
-            </Reveal>
-
-            <Reveal delay={1.1} className="hidden lg:block">
-              <RotatingBadge />
             </Reveal>
           </div>
         </div>
