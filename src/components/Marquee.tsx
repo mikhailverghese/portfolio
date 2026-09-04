@@ -3,6 +3,7 @@
 import {
   motion,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -10,11 +11,21 @@ import {
   useTransform,
   useVelocity,
 } from "motion/react";
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 function wrap(min: number, max: number, v: number) {
   const range = max - min;
   return ((((v - min) % range) + range) % range) + min;
+}
+
+function subscribeToCoarsePointer(callback: () => void) {
+  const media = window.matchMedia("(pointer: coarse)");
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
+function getCoarsePointerSnapshot() {
+  return window.matchMedia("(pointer: coarse)").matches;
 }
 
 type MarqueeProps = {
@@ -25,17 +36,21 @@ type MarqueeProps = {
 
 export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueeProps) {
   const reduce = useReducedMotion();
+  const coarsePointer = useSyncExternalStore(subscribeToCoarsePointer, getCoarsePointerSnapshot, () => false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { margin: "240px 0px 240px 0px" });
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4.5], { clamp: false });
   const directionRef = useRef(1);
+  const shouldAnimate = !reduce && !coarsePointer && inView;
 
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
   useAnimationFrame((_, delta) => {
-    if (reduce) return;
+    if (!shouldAnimate) return;
     let moveBy = directionRef.current * baseVelocity * (delta / 1000);
     const vf = velocityFactor.get();
     if (vf < 0) directionRef.current = -1;
@@ -62,12 +77,12 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
   );
 
   return (
-    <div className={`overflow-hidden border-y border-white/10 py-6 ${className}`}>
-      <motion.div style={{ x }} className="flex w-max">
+    <div ref={containerRef} className={`overflow-hidden border-y border-white/10 py-6 ${className}`}>
+      <motion.div style={shouldAnimate ? { x } : undefined} className="flex w-max">
         {row(false)}
         {row(true)}
-        {row(true)}
-        {row(true)}
+        {shouldAnimate ? row(true) : null}
+        {shouldAnimate ? row(true) : null}
       </motion.div>
     </div>
   );

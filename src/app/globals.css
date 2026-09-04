@@ -164,6 +164,12 @@ a {
 }
 
 /* ---------- reduced motion ---------- */
+@media (pointer: coarse) {
+  .noise-overlay {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

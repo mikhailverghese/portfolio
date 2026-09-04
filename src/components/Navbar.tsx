@@ -30,7 +30,7 @@ export function Navbar() {
         initial={reduce ? false : { y: -48, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-        className="fixed inset-x-0 top-0 z-50 mix-blend-difference"
+        className="fixed inset-x-0 top-0 z-50 lg:mix-blend-difference"
       >
         <div className="flex items-center justify-between px-5 py-5 text-[#f2f2f2] sm:px-8">
           <Link
