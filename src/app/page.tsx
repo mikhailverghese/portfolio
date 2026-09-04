@@ -90,6 +90,15 @@ const manifestoWords = [
   { w: "taste.", accent: true },
 ];
 
+const manifestoSecondParagraphIndex = manifestoWords.findIndex((word) => word.w === "Most");
+const manifestoParagraphs =
+  manifestoSecondParagraphIndex > 0
+    ? [
+        manifestoWords.slice(0, manifestoSecondParagraphIndex),
+        manifestoWords.slice(manifestoSecondParagraphIndex),
+      ]
+    : [manifestoWords];
+
 const capabilities: Capability[] = [
   {
     title: "Product Engineering",
@@ -201,10 +210,15 @@ export default function Home() {
             </span>
           </div>
 
-          <Manifesto
-            words={manifestoWords}
-            className="max-w-4xl text-balance font-display text-[clamp(1.65rem,3.2vw,3.1rem)] font-bold leading-[1.12] tracking-[-0.03em] text-bone"
-          />
+          <div className="max-w-4xl space-y-6 sm:space-y-8">
+            {manifestoParagraphs.map((paragraph, index) => (
+              <Manifesto
+                key={index}
+                words={paragraph}
+                className="text-balance font-display text-[clamp(1.65rem,3.2vw,3.1rem)] font-bold leading-[1.12] tracking-[-0.03em] text-bone"
+              />
+            ))}
+          </div>
         </div>
       </section>
 
