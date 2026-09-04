@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
+import { useSyncExternalStore } from "react";
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -13,8 +14,27 @@ type RevealProps = {
   once?: boolean;
 };
 
+function subscribeToCompactViewport(callback: () => void) {
+  const media = window.matchMedia("(max-width: 1023px)");
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
+function getCompactViewportSnapshot() {
+  return window.matchMedia("(max-width: 1023px)").matches;
+}
+
 export function Reveal({ children, className, delay = 0, y = 28, once = true }: RevealProps) {
   const reduce = useReducedMotion();
+  const compactViewport = useSyncExternalStore(
+    subscribeToCompactViewport,
+    getCompactViewportSnapshot,
+    () => false,
+  );
+
+  if (reduce || compactViewport) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

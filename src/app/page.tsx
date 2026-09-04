@@ -150,12 +150,12 @@ export default async function Home() {
 
       {/* ---------- HERO ---------- */}
       <section className="relative overflow-hidden border-b border-white/10 pt-28 sm:pt-36">
-        <div aria-hidden className="grid-lines absolute inset-0" />
+        <div aria-hidden className="grid-lines absolute inset-0 hidden lg:block" />
 
         {/* ambient volt glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute right-[-10%] top-[-10%] h-[560px] w-[560px] rounded-full bg-volt/10 blur-[140px]"
+          className="pointer-events-none absolute right-[-10%] top-[-10%] hidden h-[560px] w-[560px] rounded-full bg-volt/10 blur-[140px] lg:block"
         />
 
         <div className="relative mx-auto flex min-h-[85vh] w-full max-w-7xl flex-col justify-between px-6 pb-16 sm:px-10 lg:px-12">

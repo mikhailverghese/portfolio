@@ -49,16 +49,6 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
 
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
-  if (compactViewport) {
-    return (
-      <div className={`border-y border-white/10 px-6 py-5 sm:px-10 ${className}`}>
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fog">
-          Analytics Engineering · Product Design · iOS Systems · Automated Pipelines
-        </p>
-      </div>
-    );
-  }
-
   useAnimationFrame((_, delta) => {
     if (!shouldAnimate) return;
     let moveBy = directionRef.current * baseVelocity * (delta / 1000);
@@ -68,6 +58,16 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
     moveBy += directionRef.current * moveBy * Math.abs(vf);
     baseX.set(baseX.get() + moveBy);
   });
+
+  if (compactViewport) {
+    return (
+      <div className={`border-y border-white/10 px-6 py-5 sm:px-10 ${className}`}>
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fog">
+          Analytics Engineering · Product Design · iOS Systems · Automated Pipelines
+        </p>
+      </div>
+    );
+  }
 
   const row = (ariaHidden: boolean) => (
     <div aria-hidden={ariaHidden} className="flex shrink-0 items-center">
