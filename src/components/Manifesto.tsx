@@ -14,9 +14,10 @@ export function Manifesto({ words, className = "" }: ManifestoProps) {
       {words.map((word, i) => (
         <span
           key={`${word.w}-${i}`}
-          className={`mr-[0.28em] inline ${word.accent ? "font-serif italic font-normal text-volt" : ""}`}
+          className={word.accent ? "font-serif italic font-normal text-volt" : undefined}
         >
           {word.w}
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </p>

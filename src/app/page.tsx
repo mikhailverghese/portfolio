@@ -203,7 +203,7 @@ export default function Home() {
 
           <Manifesto
             words={manifestoWords}
-            className="max-w-5xl font-sans text-[clamp(1.4rem,2.8vw,2.5rem)] font-medium leading-[1.38] tracking-[-0.02em] text-bone"
+            className="max-w-4xl text-balance font-display text-[clamp(1.65rem,3.2vw,3.1rem)] font-bold leading-[1.12] tracking-[-0.03em] text-bone"
           />
         </div>
       </section>
