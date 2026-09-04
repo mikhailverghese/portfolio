@@ -164,7 +164,7 @@ a {
 }
 
 /* ---------- reduced motion ---------- */
-@media (pointer: coarse) {
+@media (max-width: 1023px) {
   .noise-overlay {
     display: none;
   }

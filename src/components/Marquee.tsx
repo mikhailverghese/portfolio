@@ -18,14 +18,14 @@ function wrap(min: number, max: number, v: number) {
   return ((((v - min) % range) + range) % range) + min;
 }
 
-function subscribeToCoarsePointer(callback: () => void) {
-  const media = window.matchMedia("(pointer: coarse)");
+function subscribeToCompactViewport(callback: () => void) {
+  const media = window.matchMedia("(max-width: 1023px)");
   media.addEventListener("change", callback);
   return () => media.removeEventListener("change", callback);
 }
 
-function getCoarsePointerSnapshot() {
-  return window.matchMedia("(pointer: coarse)").matches;
+function getCompactViewportSnapshot() {
+  return window.matchMedia("(max-width: 1023px)").matches;
 }
 
 type MarqueeProps = {
@@ -36,7 +36,7 @@ type MarqueeProps = {
 
 export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueeProps) {
   const reduce = useReducedMotion();
-  const coarsePointer = useSyncExternalStore(subscribeToCoarsePointer, getCoarsePointerSnapshot, () => false);
+  const compactViewport = useSyncExternalStore(subscribeToCompactViewport, getCompactViewportSnapshot, () => false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { margin: "240px 0px 240px 0px" });
   const baseX = useMotionValue(0);
@@ -45,7 +45,7 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
   const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4.5], { clamp: false });
   const directionRef = useRef(1);
-  const shouldAnimate = !reduce && !coarsePointer && inView;
+  const shouldAnimate = !reduce && !compactViewport && inView;
 
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
