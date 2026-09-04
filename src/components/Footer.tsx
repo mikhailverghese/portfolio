@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { LocalTime } from "@/components/LocalTime";
-
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/mikhailverghese/" },
   { label: "GitHub", href: "https://github.com/mikhailverghese" },
@@ -72,7 +70,6 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-white/10 pt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-fog sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Mikhail Verghese</p>
-          <LocalTime />
           <p>Built with Next.js + Motion</p>
         </div>
       </div>
