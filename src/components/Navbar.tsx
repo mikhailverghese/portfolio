@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { LocalTime } from "@/components/LocalTime";
 import { ScrambleText } from "@/components/ScrambleText";
 
 const links = [
@@ -94,10 +93,10 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="group flex items-baseline gap-5 border-b border-white/10 py-6"
+                    className="group grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-4 border-b border-white/10 py-6"
                   >
                     <span className="font-mono text-xs text-volt">0{i + 1}</span>
-                    <span className="font-display text-5xl font-extrabold uppercase tracking-tight text-bone transition group-hover:text-volt">
+                    <span className="min-w-0 font-display text-[clamp(2.35rem,11vw,3rem)] font-extrabold uppercase leading-none tracking-tight text-bone transition group-hover:text-volt sm:text-5xl">
                       {link.label}
                     </span>
                   </Link>
@@ -108,10 +107,9 @@ export function Navbar() {
               initial={reduce ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-fog"
+              className="font-mono text-[10px] uppercase tracking-[0.3em] text-fog"
             >
               <span>Analyst · Builder</span>
-              <LocalTime />
             </motion.div>
           </motion.div>
         )}
