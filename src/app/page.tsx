@@ -230,7 +230,7 @@ export default function Home() {
               /03 Index of Systems
             </p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold uppercase leading-none tracking-tight text-bone">
-              Selected <span className="text-outline">Work</span>
+              Projects
             </h2>
           </div>
           <p className="max-w-md font-mono text-xs uppercase leading-6 tracking-[0.18em] text-fog">
