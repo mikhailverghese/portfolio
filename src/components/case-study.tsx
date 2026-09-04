@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function BackLink() {
@@ -66,12 +66,12 @@ export function GalleryItem({
       <div className="group border-t border-white/10 pt-8 sm:pt-10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="relative border border-white/10 bg-panel p-3">
-            <ParallaxImage
+            <Image
               src={image}
               alt={title}
               width={imageWidth}
               height={imageHeight}
-              className="w-full"
+              className="h-auto w-full"
             />
             <span className="absolute bottom-4 left-4 bg-void/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-volt backdrop-blur">
               Fig. {String(index).padStart(2, "0")}
