@@ -7,13 +7,13 @@ export function Footer() {
         <Link
           href="#top"
           data-cursor-label="TOP"
-          className="group w-fit"
+          className="group max-w-full w-fit"
           aria-label="Back to top"
         >
-          <span className="text-outline block font-display text-[clamp(3rem,10vw,7rem)] font-extrabold uppercase leading-none tracking-tight transition-all duration-500 group-hover:[-webkit-text-stroke-color:var(--color-volt)]">
+          <span className="text-outline block font-display text-[clamp(2.15rem,9vw,7rem)] font-extrabold uppercase leading-none tracking-tight transition-all duration-500 group-hover:[-webkit-text-stroke-color:var(--color-volt)]">
             Mikhail
           </span>
-          <span className="text-outline block font-display text-[clamp(3rem,10vw,7rem)] font-extrabold uppercase leading-none tracking-tight transition-all duration-500 group-hover:[-webkit-text-stroke-color:var(--color-volt)]">
+          <span className="text-outline block font-display text-[clamp(2.15rem,9vw,7rem)] font-extrabold uppercase leading-none tracking-tight transition-all duration-500 group-hover:[-webkit-text-stroke-color:var(--color-volt)]">
             Verghese
           </span>
         </Link>
