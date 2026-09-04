@@ -173,8 +173,19 @@ export default async function Home() {
 
           {/* title block */}
           <div className="my-12 max-w-6xl space-y-8">
+            <h1 className="font-display text-[clamp(2.2rem,12vw,3.45rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.04em] text-bone sm:hidden">
+              <span className="block">I BUILD</span>
+              <span className="block">
+                THE <span className="text-outline">THINGS</span>
+              </span>
+              <span className="block tracking-tight">
+                I <span className="font-serif italic font-normal normal-case text-volt">wish</span>{" "}
+                existed.
+              </span>
+            </h1>
+
             <HeroTitle
-              className="font-display text-[clamp(2.7rem,8.5vw,7.6rem)] font-extrabold uppercase leading-[0.9] tracking-tight text-bone"
+              className="hidden font-display text-[clamp(2.7rem,8.5vw,7.6rem)] font-extrabold uppercase leading-[0.9] tracking-tight text-bone sm:block"
               lines={[
                 [{ t: "I" }, { t: "build" }, { t: "the" }, { t: "things", outline: true }],
                 [{ t: "I" }, { t: "wish", accent: true }, { t: "existed." }],
