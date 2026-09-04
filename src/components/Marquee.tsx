@@ -11,21 +11,11 @@ import {
   useTransform,
   useVelocity,
 } from "motion/react";
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
 
 function wrap(min: number, max: number, v: number) {
   const range = max - min;
   return ((((v - min) % range) + range) % range) + min;
-}
-
-function subscribeToCompactViewport(callback: () => void) {
-  const media = window.matchMedia("(max-width: 1023px)");
-  media.addEventListener("change", callback);
-  return () => media.removeEventListener("change", callback);
-}
-
-function getCompactViewportSnapshot() {
-  return window.matchMedia("(max-width: 1023px)").matches;
 }
 
 type MarqueeProps = {
@@ -36,7 +26,6 @@ type MarqueeProps = {
 
 export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueeProps) {
   const reduce = useReducedMotion();
-  const compactViewport = useSyncExternalStore(subscribeToCompactViewport, getCompactViewportSnapshot, () => false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { margin: "240px 0px 240px 0px" });
   const baseX = useMotionValue(0);
@@ -45,7 +34,7 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
   const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4.5], { clamp: false });
   const directionRef = useRef(1);
-  const shouldAnimate = !reduce && !compactViewport && inView;
+  const shouldAnimate = !reduce && inView;
 
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
@@ -58,16 +47,6 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
     moveBy += directionRef.current * moveBy * Math.abs(vf);
     baseX.set(baseX.get() + moveBy);
   });
-
-  if (compactViewport) {
-    return (
-      <div className={`border-y border-white/10 px-6 py-5 sm:px-10 ${className}`}>
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fog">
-          Analytics Engineering · Product Design · iOS Systems · Automated Pipelines
-        </p>
-      </div>
-    );
-  }
 
   const row = (ariaHidden: boolean) => (
     <div aria-hidden={ariaHidden} className="flex shrink-0 items-center">
@@ -91,8 +70,8 @@ export function Marquee({ items, className = "", baseVelocity = 2.4 }: MarqueePr
       <motion.div style={shouldAnimate ? { x } : undefined} className="flex w-max">
         {row(false)}
         {row(true)}
-        {shouldAnimate ? row(true) : null}
-        {shouldAnimate ? row(true) : null}
+        {row(true)}
+        {row(true)}
       </motion.div>
     </div>
   );
