@@ -9,6 +9,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Preloader } from "@/components/Preloader";
 import { WorkIndex, type WorkProject } from "@/components/WorkIndex";
 
+const GITHUB_USER_API_URL = "https://api.github.com/users/mikhailverghese";
+
 const featuredProjects: WorkProject[] = [
   {
     name: "Centful",
@@ -126,7 +128,22 @@ const marqueeItems = [
   "Data Architecture",
 ];
 
-export default function Home() {
+async function getPublicRepoCount() {
+  try {
+    const response = await fetch(GITHUB_USER_API_URL, {
+      next: { revalidate: 3600 },
+    });
+    if (!response.ok) return 5;
+    const data = (await response.json()) as { public_repos?: number };
+    return typeof data.public_repos === "number" ? data.public_repos : 5;
+  } catch {
+    return 5;
+  }
+}
+
+export default async function Home() {
+  const publicRepoCount = await getPublicRepoCount();
+
   return (
     <main className="relative bg-void text-bone">
       <Preloader />
@@ -238,10 +255,10 @@ export default function Home() {
       {/* ---------- METRICS BANNER ---------- */}
       <section className="border-y border-white/10 bg-panel">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
+          <Counter to={publicRepoCount} label="Public repos" sublabel="Live from GitHub" />
           <Counter to={3} suffix="+" label="Production apps" sublabel="Live & active" />
-          <Counter to={100} suffix="%" label="Full-stack craft" sublabel="Data → UI" />
-          <Counter to={24} suffix="h" label="Pipeline cadence" sublabel="Automated ingestion" />
-          <Counter to={0} suffix="%" label="Filler" sublabel="Pure signal" />
+          <Counter to={3} suffix="+" label="Data pipelines" sublabel="Scheduled & event-driven" />
+          <Counter to={4} suffix="+" label="Integrations" sublabel="Plaid, OpenAI, GitHub, LinkedIn" />
         </div>
       </section>
 
