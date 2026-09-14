@@ -34,28 +34,22 @@ const meta = [
 
 const heroSlides: HeroSlide[] = [
   {
-    title: "Intelligence Feed",
-    description: "Real-time scored opportunity stream filtered to recent 24-hour ingestion cycles.",
-    image: "/images/job-checker/hero-mobile.png",
-    alt: "Job Checker dashboard hero showing weighted job matches and live pipeline stats.",
+    title: "Viewport Overview",
+    description: "A wide dashboard view combining the live pipeline snapshot, active controls, and top-ranked job stream in one frame.",
+    image: "/images/job-checker/viewport-overview.png",
+    alt: "Job Checker wide dashboard overview showing the weighted matches hero, filters, and ranked results.",
   },
   {
-    title: "Control Surface",
-    description: "Fine-grained sliders for score thresholds, salary floors, applicant profiles, and locations.",
-    image: "/images/job-checker/filters-mobile.png",
-    alt: "Job Checker filter controls for applicant, score, salary, location, and search.",
+    title: "Ranked Opportunity Feed",
+    description: "A denser dashboard crop focused on scored recommendation cards, match tags, and cover-letter actions.",
+    image: "/images/job-checker/viewport-feed.png",
+    alt: "Job Checker wide feed view with ranked job cards and generate letter actions.",
   },
   {
-    title: "Evaluation Cards",
-    description: "Dense recommendation objects showing positive/negative keyword matches and direct application actions.",
-    image: "/images/job-checker/cards-mobile.png",
-    alt: "Job Checker ranked job cards with scores, tags, and cover letter actions.",
-  },
-  {
-    title: "Drafting Studio",
-    description: "LLM-synthesized cover letter viewer with on-the-fly PDF formatting and immediate download.",
-    image: "/images/job-checker/letter-mobile.png",
-    alt: "Job Checker cover letter view with PDF download action.",
+    title: "Cover Letter Workspace",
+    description: "The letter drafting surface presents a tailored output with direct PDF export and a fast path back to the dashboard.",
+    image: "/images/job-checker/viewport-letter.png",
+    alt: "Job Checker wide cover letter workspace with PDF download and dashboard return actions.",
   },
 ];
 
@@ -163,7 +157,7 @@ export default function JobSearchAnalyticsProjectPage() {
             </div>
           </div>
 
-          <HeroSlider slides={heroSlides} imageWidth={1106} imageHeight={2266} />
+          <HeroSlider slides={heroSlides} imageWidth={2880} imageHeight={1548} />
         </div>
       </section>
 
