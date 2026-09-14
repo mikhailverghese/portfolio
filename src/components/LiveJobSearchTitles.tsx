@@ -18,7 +18,9 @@ export function LiveJobSearchTitles() {
 
     async function loadConfig() {
       try {
-        const response = await fetch(SCORING_CONFIG_URL, { cache: "force-cache" });
+        const response = await fetch(`${SCORING_CONFIG_URL}?ts=${Date.now()}`, {
+          cache: "no-store",
+        });
         if (!response.ok) return;
         const next = (await response.json()) as ScoringConfig;
         if (!cancelled) {
