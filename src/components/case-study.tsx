@@ -55,13 +55,15 @@ export function GalleryItem({
 }: GalleryItemProps) {
   return (
     <div className="group border-t border-white/10 pt-8 sm:pt-10">
-      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div className="relative border border-white/10 bg-panel p-3">
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8">
+        <div className="relative mx-auto w-full max-w-[320px] border border-white/10 bg-panel p-3 sm:max-w-[360px] lg:max-w-none">
           <Image
             src={image}
             alt={title}
             width={imageWidth}
             height={imageHeight}
+            loading="eager"
+            sizes="(max-width: 639px) 320px, (max-width: 1279px) 360px, 52vw"
             className="h-auto w-full"
           />
           <span className="absolute bottom-4 left-4 bg-void/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-volt backdrop-blur">

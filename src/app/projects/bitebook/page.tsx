@@ -142,10 +142,10 @@ export default function BitebookProjectPage() {
 
       {/* ---------- HERO ---------- */}
       <section className="relative overflow-hidden border-b border-white/10 pt-28 sm:pt-36">
-        <div aria-hidden className="grid-lines absolute inset-0" />
+        <div aria-hidden className="grid-lines absolute inset-0 hidden xl:block" />
         <div
           aria-hidden
-          className="pointer-events-none absolute right-[-10%] top-0 h-[500px] w-[500px] rounded-full bg-volt/10 blur-[130px]"
+          className="pointer-events-none absolute right-[-10%] top-0 hidden h-[500px] w-[500px] rounded-full bg-volt/10 blur-[130px] xl:block"
         />
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-20 sm:px-10 lg:px-12">

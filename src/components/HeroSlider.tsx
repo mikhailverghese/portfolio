@@ -21,13 +21,13 @@ type HeroSliderProps = {
 };
 
 function subscribeToCompactViewport(callback: () => void) {
-  const media = window.matchMedia("(max-width: 1023px)");
+  const media = window.matchMedia("(max-width: 1279px)");
   media.addEventListener("change", callback);
   return () => media.removeEventListener("change", callback);
 }
 
 function getCompactViewportSnapshot() {
-  return window.matchMedia("(max-width: 1023px)").matches;
+  return window.matchMedia("(max-width: 1279px)").matches;
 }
 
 export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps) {
