@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const AUTOPLAY_MS = 5200;
@@ -20,10 +20,25 @@ type HeroSliderProps = {
   imageHeight: number;
 };
 
+function subscribeToCompactViewport(callback: () => void) {
+  const media = window.matchMedia("(max-width: 1023px)");
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
+function getCompactViewportSnapshot() {
+  return window.matchMedia("(max-width: 1023px)").matches;
+}
+
 export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduce = useReducedMotion();
+  const compactViewport = useSyncExternalStore(
+    subscribeToCompactViewport,
+    getCompactViewportSnapshot,
+    () => true,
+  );
 
   const goTo = useCallback(
     (index: number) => setActiveIndex(((index % slides.length) + slides.length) % slides.length),
@@ -31,14 +46,75 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
   );
 
   useEffect(() => {
-    if (reduce || paused || slides.length <= 1) return;
+    if (reduce || paused || compactViewport || slides.length <= 1) return;
     const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % slides.length);
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, paused, reduce, slides.length]);
+  }, [activeIndex, compactViewport, paused, reduce, slides.length]);
 
   const activeSlide = slides[activeIndex];
+
+  if (compactViewport) {
+    return (
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {slides.map((slide, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <button
+                key={slide.title}
+                type="button"
+                onClick={() => goTo(index)}
+                aria-pressed={isActive}
+                className={`relative px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-200 ${
+                  isActive
+                    ? "bg-volt font-bold text-void"
+                    : "border border-white/10 text-fog"
+                }`}
+              >
+                <span>{slide.title}</span>
+                <span className="ml-2 opacity-60">/{String(index + 1).padStart(2, "0")}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="relative border border-white/10 bg-panel px-4 py-8 sm:px-6 sm:py-10">
+          <span className="absolute left-2 top-2 z-10 font-mono text-[9px] uppercase tracking-widest text-fog">
+            VIEWPORT // {String(activeIndex + 1).padStart(2, "0")}
+          </span>
+          <span className="absolute right-2 top-2 z-10 font-mono text-[9px] uppercase tracking-widest text-volt">
+            LIVE CAPTURE
+          </span>
+
+          <div className="mx-auto w-full max-w-[280px] sm:max-w-[340px]">
+            <Image
+              src={activeSlide.image}
+              alt={activeSlide.alt}
+              width={imageWidth}
+              height={imageHeight}
+              priority={activeIndex === 0}
+              draggable={false}
+              sizes="(max-width: 639px) 280px, 340px"
+              className="h-auto w-full select-none border border-white/15 bg-void p-2 shadow-[0_22px_60px_rgba(0,0,0,0.55)]"
+            />
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 pt-4">
+          <div className="flex flex-col gap-2">
+            <p className="font-display text-2xl font-bold uppercase tracking-tight text-bone">
+              {activeSlide.title}
+            </p>
+            {activeSlide.description ? (
+              <p className="text-sm leading-7 text-fog">{activeSlide.description}</p>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -46,7 +122,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* progress + tabs */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-2">
           {slides.map((slide, index) => {
@@ -82,7 +157,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
         </div>
       </div>
 
-      {/* Stage */}
       <motion.div
         drag={reduce ? false : "x"}
         dragConstraints={{ left: 0, right: 0 }}
@@ -93,7 +167,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
         }}
         className="group relative cursor-grab border border-white/10 bg-panel active:cursor-grabbing"
       >
-        {/* corner markers */}
         <span className="absolute left-2 top-2 z-20 font-mono text-[9px] uppercase tracking-widest text-fog">
           VIEWPORT // {String(activeIndex + 1).padStart(2, "0")}
         </span>
@@ -101,7 +174,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
           LIVE CAPTURE
         </span>
 
-        {/* arrows */}
         <button
           type="button"
           aria-label="Previous slide"
@@ -119,7 +191,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
           →
         </button>
 
-        {/* slide */}
         <div className="flex items-center justify-center px-6 py-12 sm:py-16">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
@@ -137,6 +208,7 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
                 height={imageHeight}
                 priority={activeIndex === 0}
                 draggable={false}
+                sizes="(max-width: 1279px) 480px, 560px"
                 className="h-[400px] w-auto select-none sm:h-[480px] lg:h-[560px]"
               />
             </motion.div>
@@ -144,7 +216,6 @@ export function HeroSlider({ slides, imageWidth, imageHeight }: HeroSliderProps)
         </div>
       </motion.div>
 
-      {/* caption */}
       <div className="min-h-[64px] border-t border-white/10 pt-4">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div

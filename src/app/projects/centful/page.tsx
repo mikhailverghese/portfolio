@@ -9,7 +9,6 @@ import {
   SectionCard,
   SnapshotAside,
 } from "@/components/case-study";
-import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Centful — Mikhail Verghese",
@@ -126,33 +125,25 @@ export default function CentfulProjectPage() {
           <BackLink />
 
           <div className="space-y-6">
-            <Reveal y={16}>
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-volt">
-                Case Study // 01
-              </p>
-            </Reveal>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-volt">
+              Case Study // 01
+            </p>
 
-            <Reveal delay={0.1}>
-              <h1 className="max-w-5xl font-display text-[clamp(2.5rem,7vw,5.8rem)] font-extrabold uppercase leading-[0.94] tracking-tight text-bone">
-                Centful: A calmer <br />
-                <span className="font-serif italic font-normal normal-case text-volt">
-                  financial architecture
-                </span>{" "}
-                for iOS.
-              </h1>
-            </Reveal>
+            <h1 className="max-w-5xl font-display text-[clamp(2.5rem,7vw,5.8rem)] font-extrabold uppercase leading-[0.94] tracking-tight text-bone">
+              Centful: A calmer <br />
+              <span className="font-serif italic font-normal normal-case text-volt">
+                financial architecture
+              </span>{" "}
+              for iOS.
+            </h1>
 
-            <Reveal delay={0.2}>
-              <p className="max-w-3xl font-sans text-lg leading-8 text-fog sm:text-2xl sm:leading-10">
-                An iOS expense operating system combining direct Plaid sync, deterministic regex
-                rule automation, and an interaction model designed around daily clarity.
-              </p>
-            </Reveal>
+            <p className="max-w-3xl font-sans text-lg leading-8 text-fog sm:text-2xl sm:leading-10">
+              An iOS expense operating system combining direct Plaid sync, deterministic regex
+              rule automation, and an interaction model designed around daily clarity.
+            </p>
           </div>
 
-          <Reveal delay={0.3} y={32}>
-            <HeroSlider slides={heroSlides} imageWidth={1179} imageHeight={2556} />
-          </Reveal>
+          <HeroSlider slides={heroSlides} imageWidth={1179} imageHeight={2556} />
         </div>
       </section>
 
