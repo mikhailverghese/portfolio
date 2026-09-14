@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { LiveJobSearchTitles } from "@/components/LiveJobSearchTitles";
 import { LiveScoringConfig } from "@/components/LiveScoringConfig";
 import { MagneticLink } from "@/components/MagneticLink";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -87,7 +88,7 @@ const sections = [
     label: "Ingestion Loop",
     title: "Scheduled Data Harvesting",
     body: [
-      "A Python ingestion pipeline executes daily on a scheduled cadence. It queries LinkedIn for target roles spanning Analytics Engineer, BI Engineer, BI Analyst, Data Analyst, Automation Engineer, and AI Engineer, strictly published within the preceding 24 hours.",
+      "A Python ingestion pipeline executes daily on a scheduled cadence. It queries LinkedIn for the live search-title set below, strictly published within the preceding 24 hours.",
       "The harvester deduplicates results against historical runs and commits a sanitized, public-safe JSON payload directly consumed by the dashboard.",
     ],
   },
@@ -171,8 +172,13 @@ export default function JobSearchAnalyticsProjectPage() {
               label={section.label}
               title={section.title}
             >
-              {section.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+              {section.body.map((paragraph, paragraphIndex) => (
+                <div key={paragraph} className="space-y-5">
+                  <p>{paragraph}</p>
+                  {section.label === "Ingestion Loop" && paragraphIndex === 0 ? (
+                    <LiveJobSearchTitles />
+                  ) : null}
+                </div>
               ))}
             </SectionCard>
           ))}
